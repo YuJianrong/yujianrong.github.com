@@ -1,0 +1,2126 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Dive into JavaScript - A Brief JavaScript Introduction</title>
+
+		<meta name="description" content="A Brief JavaScript Introduction">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<script src="js/custom.js"></script>
+
+    <script src="lib/ace/ace.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Dive into JavaScript</h1>
+					<h3>A Brief JavaScript Introduction</h3>
+					<p>
+						<small>Created by Jianrong Yu</small>
+					</p>
+				</section>
+
+        <section>
+          <section>
+          <h2>History of JavaScript</h2>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <p>
+          <small><i>
+              Those who do not read history are doomed to repeat it. (by George Santayana)
+          </i></small>
+          </p>
+          </section>
+
+          <section>
+          <h2>Birth of JavaScript</h2>
+          <p>
+            <ul>
+              <li>Lightweight interpreted language for nonprofessional programmers (like Microsoft's Visual Basic) in 1995.<br/>
+              <li>Standardized as ECMAScript in 1996. 
+            </ul>
+          </p>
+          </section>
+
+          <section>
+          <h2>Evolution of ECMAScript</h2>
+          <p>
+            <ul>
+              <li>Edition 3: Published in December 1999, most widely implemented version </li>
+              <li>Edition 4: Abandoned in 2008</li>
+              <li>Edition 5(5.1): Plulished in December 2009, implemented in IE9+ and all other browsers.</li>
+              <li>Edition Harmony: Former edition 4</li>
+            </ul>
+          </p>
+          </section>
+
+          <section>
+          <h3>ECMAScript Edition5 - Strict Mode</h3>
+          <p style="text-align:left">
+            Strict mode added to ECMAScript Edition 5 to standardize the behaviour of Javascript.<br/>
+            Activate the Strict Mode:<br/>
+            Add "use strict"; to the first statement of any excution context.
+          </p>
+          <div class="JSCodePad" style=" height:200px;">
+            <xmp class="code" style="width:100%;text-align:left; line-height:normal;">
+function strictFunc(){
+  "use strict";
+  // ... code in strict mode
+}
+            </xmp>
+            <div class="output" editable="true" style="display:none"> </div>
+            <div class="run" style="display:none">run</div>
+          </div>
+
+          </section>
+
+        </section>
+
+
+        <section>
+          <section>
+          <h2>Playground</h2>
+          <br/>
+          <p >
+          Developer tools in browser:
+          </p>
+          <br/>
+            <ul>
+              <li>Chrome Webkit developer tools
+              <li>Firefox firebug
+            </ul>
+          </section>
+
+          <section>
+          <h3>Chrome - Code evaluation</h3>
+
+          <img src="./image/playground-1.png" style="border:0">
+          </section>
+
+          <section>
+          <h3>Chrome - Debug support</h3>
+          <img src="./image/playground-2.png"  style="border:0">
+          </section>
+
+          <section>
+          <h3>Online Playground</h3>
+          <p>
+          Try the hidden button on the bottom left corner of the page.
+          </p>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// And you can use console object in the Code Pad to print information:
+
+console.log("Hello, it's normal text");
+
+console.warn("Hello, it's warning text");
+
+console.error("Hello, it's error text");
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+        </section>
+
+
+        <section>
+          <section>
+          <h2>Types</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Types - 5 primitive types</h3>
+          <p>
+          Primitive types:
+          </p>
+
+          <ul>
+            <li>Undefined
+            <li>Null
+            <li>Boolean
+            <li>String <span  class="warning">(Immutable)</span>
+            <li>Number (double/32bit integer)
+          </ul>
+
+          </section>
+
+          <section>
+            <h3>Number literal</h3>
+
+            <div style="text-align:left; font-size:0.7em;line-height: normal;">
+              <li>Normal</li>
+              <code>123, -123</code>
+              <li>Float</li>
+              <code> 1.5, 2.34e20, -1.2e-20 </code>
+              <li>Hex number:</li>
+              <code>0xAFF, 0x1FFFFFFFF</code>
+              <li>Octal number <span class="warning">(not avaliable on strict mode)</span>:</li>
+              <code>023, 077</code>
+            </div>
+            <div class="JSConsole">
+              <div class="output" style="height: 200px;" editable="true"> </div>
+              <input type="text"></input>
+            </div>
+
+          </section>
+
+          <section>
+            <h3>String literal</h3>
+            <div style="text-align:left; font-size:0.6em;line-height: normal;">
+              <li>Single quotes or double quotes</li>
+              <code>'string', "string", '"double quotes in single quotes"', "'same for single'"</code>
+              <li>Unicode ucs-2 encoding used internal(two characters for unicode supplementary planes)</li>
+              <code> '你好', '𠀰𠀱𠀲𠀳𠀴' </code>
+              <li>Control characters</li>
+              <code>\uHHHH (unicode, BMP only), \b (backspace), \f (formfeed), \n (newline), \r (carriage return), \t (tab), \' , \"</code>
+            </div>
+            <div class="JSConsole">
+              <div class="output" style="height: 200px;" editable="true"> </div>
+              <input type="text"></input>
+            </div>
+          </section>
+
+
+
+          <section>
+          <h3>Types Operator: <span style="text-transform:none">typeof</span></h3>
+
+          <img src="./image/type-1.png" style="border:0">
+          </section>
+
+
+
+          <section>
+          <h3>Explicit Type Conversion</h3>
+
+          <ul>
+            <li><i>Boolean()</i> 
+            <li><i>String()</i>
+            <li><i>Number()</i>
+          </ul>
+          <br/>
+          And other ways:
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// convert to Boolean:
+console.log( !!0 );
+
+// convert to String:
+console.log( "" + 100 );
+
+// convert to Number:
+console.log( parseInt("234.3", 10) );
+console.log( parseFloat("234.3") );
+console.log( +"234.3" );
+// DO NOT:
+// x|0, x >> 0 for interger conversion
+console.error( "0x10000000" |0 );
+console.error( "0x100000000" |0 );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+
+          <section>
+          <h3>Implicit Type Conversion</h3>
+
+          Implicit type conversion happended for a lot of operators.
+          <br/>
+          <div class="JSCodePad" style=" height:350px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+console.log( 5 + "10" );
+console.log( "5" + 10 );
+console.log( "5" - 10 );
+console.log( "" == false );
+console.log( "" == 0 );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>Types - Map-like object</h3>
+          <br/>
+          <div class="JSCodePad" style=" height:350px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// object literal
+var mObjLiteral = {};
+mObjLiteral.property1 = 1;
+mObjLiteral["property2"] = "value2";
+
+// object literal
+var mObjLiteral = { 
+ "property1" : 1,
+ "property2" : "value2" 
+};
+
+var sValue1 = mObjLiteral["property1"];
+var sValue2 = mObjLiteral.property1;
+
+console.log( 
+  JSON.stringify( 
+    mObjLiteral, 
+    null, 
+    "  "
+  )
+);
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+
+          <section>
+          <h3>Object Type Operators</h3>
+          <div style="text-align:left">
+            <ul>
+              <li>in
+              <li>delete
+              <li>instanceof
+              <li>for (in ...) loop <span  class="warning">(unordered)</span>
+            </ul>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="width:100%;text-align:left; line-height:normal;">
+var obj = { "a" : 100, "b" : 200 };
+
+"a" in obj;
+// true
+
+delete obj["a"];
+"a" in obj;
+// false
+
+new Date() instanceof Date;
+// true
+
+"str" instanceof String;
+// false, Primitive string is not instance of String Class
+
+
+obj.b = undefined;
+"b" in obj;
+// true, set to undefined does not remove the property
+
+for ( var key in obj ) {
+  console.log( "key: " + key + "  value: " + obj[key]);
+}
+            </xmp>
+            <div class="output" editable="true" style="display:none"> </div>
+            <div class="run" style="display:none">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>Object copy by reference</h3>
+          <div style="text-align:left">
+            <p>
+            Object is always copied by reference. 
+            </p>
+          </div>
+          <div class="JSCodePad" style=" height:350px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var objA = {
+  name: "ObjA",
+  value: 100
+};
+
+function modifyObject( obj ){
+  obj.name = "modifiedObject";
+}
+
+// modify the object argument of a function
+modifyObject( objA );
+
+// modifiy the copied object
+var objB = objA;
+objB.value = 200;
+
+console.log( objA.name);
+console.log( objA.value );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3>Global Object</h3>
+          <div style="text-align:left">
+          <p>There is always a global object in ECMAScript environment. </p>
+          <ul style="text-align:left">
+            <li><i>window</i> in browser
+            <li><i>global</i> in nodejs
+          </ul>
+
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// assign to Global Object directly
+window.globalVar1 = 100;
+
+// assign in global excutation context
+var globalVar2 = 200; // ATTENTION: avoid global pollution
+
+// assign in non-strict mode function
+function nonStrictFunc(){
+  // "use strict";
+  globalVar3 = 300;  // ECMAScript 5: exception thrown
+}
+
+nonStrictFunc();
+
+console.log( window.globalVar1 );
+// console.log( window.globalVar2 ); // Code pad is executed in function.
+console.log( window.globalVar3 );
+
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          
+        </section>
+
+
+
+        <section>
+          <section>
+          <h2>Identifier</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Identifier in ECMAScript</h3>
+          <div style="text-align:left; font-size:0.8em">
+            Identifier in Javascript:
+            <ul>
+              <li>Start with _, $, alphabet character or other unicode letter
+              <li>Used in loop label ,variable name and object properties assign/get
+            </ul>
+          </div>
+
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var $Hello = "hello, ";
+var 世界 = {
+    なまえ:"世界"
+};
+
+console.log( $Hello + 世界.なまえ );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Reserved Words in ECMAScript</h3>
+
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Identifier cannot be any of the following reserved words:
+            <li>Null and Boolean Literal:</li>
+            <code>null true false</code>
+            <li> Keyword: </li>
+            <code>
+              break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with
+            </code>
+            <li>Reserved words for future:</li>
+            <code>
+              class const enum export extends import super
+            </code>
+            <li>Strict mode:</li>
+            <code></code>
+            <code>
+              implements interface let package private protected public static yield
+            </code>
+          </div>
+          </section>
+
+          <section>
+          <h3>Words in Global Object</h3>
+
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Attention: These words are properties of Global Object and avaliable for identifier, but DO NOT USE THESE WORDS FOR IDENTIFIERS!
+            <li>undefined:</li>
+            <code>undefined</code>
+            <li>Primitive type wrapper:</li>
+            <code>Boolean Number String</code>
+            <li>Special number:</li>
+            <code>NaN Infinity</code>
+            <li>Other built-in ECMAScript class:</li>
+            <code>Object Function Array Date RegExp</code>
+          </div>
+          </section>
+
+        </section>
+
+
+        <section>
+          <section>
+          <h2>Operators</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Basic operators</h3>
+
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Arithmetic operators:</li>
+            <code>+ -(subtraction ) * / % </code> <br/>
+            <code>++ -- -(Unary negation)</code>
+            <li>Bitwise operators <span  class="warning">(Note: the number will be converted to 32 bits integer)</span></li>
+            <code>&amp; | ^ ~ &lt;&lt; &gt;&gt; <b>&gt;&gt;&gt;</b> </code>
+            <li>Assign operators:</li>
+            <code>+= -= *= /= %= &lt;&lt;= &gt;&gt;= &gt;&gt;&gt;= &amp;= ^= |=</code>
+
+          </div>
+          </section>
+
+          <section data-state="warningState">
+
+          <h3>Comparison and other operators</h3>
+
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Comparison operators</li>
+            <code>== != &gt; &gt;= &lt; &lt;= <b  class="warning">=== !==</b> </code>
+            <li>Logical operators</li>
+            <code>&amp;&amp; || !</code>
+            <li>String operators</li>
+            <code>+ +=</code>
+            </div>
+          <div class="JSCodePad" style=" height:200px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+console.log( 5 == "5" );
+console.log( 0 == "" );
+console.log( 0 == {} );
+console.log( 0 == [] );
+console.log( undefined == null );
+console.log( undefined == 0 );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+          <section>
+          <h3>Special operators</h3>
+
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            
+            <li>Conditional operator</li>
+            <code>condition ? val1 : val2</code>
+            <li>Comma operator</li>
+            <code>,</code>
+            <li>Operators for object</li>
+            <code>delete in instanceof new this</code>
+            <li>Special operators</li>
+            <code>typeof void</code>
+          </section>
+
+          <section>
+          <h3>Operator precedence</h3>
+
+          <img src="./image/operators-1.png" style="border:0">
+          </section>
+
+        </section>
+
+
+
+        <section>
+          <section>
+          <h2>Statements</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Comments</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Line comment</li>
+            <code>// this is a line comment</code>
+            <li>Block comment</li>
+            <code>/* this is a block comment */ </code>
+            <li>HTML comment <span class="warning">(not recommended)</span></li>
+            <code>&lt;!-- this is a HTML comment --&gt;</xmp></code>
+          </div>
+          </section>
+
+          <section  data-state="warningState">
+          <h3>Variable Declaration and Hoisting</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Variable declaration</li>
+            <code>var name_1 [ = value_1] [ ,..., name_n [= value_n]] </code>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var variableA = 200;
+
+(function (){
+
+  console.log( variableA );
+  var variableA = 100;
+  console.log( variableA );
+
+  console.log( variableB );
+
+})();
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+          <section>
+          <h3>Function Declaration and Hoisting</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Function declaration</li>
+            <code>function functionName([arguments list]) { [statements] }</code>
+            <li>Function Expression</li>
+            <code>var foo = function([arguments list]) { [statements] }</code>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+(function (){
+  
+  // funcA();
+  // funcB();
+  console.log( funcA );
+  console.log( funcB );
+
+  // function declaration
+  function funcA(){ console.log("funcA");};
+  // function expression
+  var funcB = function(){console.log("funcB")};
+
+})();
+            
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
+          </section>
+
+          <section>
+          <h3>Conditionals</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>if</li>
+            <code>if (expression) { statements } [ else if (expression) {statements} ]</code>
+            <li>switch</li>
+            <code>switch (expression) { case x: statements; break; [default: ...] }</code>
+            <li>? :</li>
+            <code>condition ? val1 : val2</code>
+          </div>
+          </section>
+
+          <section>
+          <h3>Loops</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>while</li>
+            <code>while (expression) statements</code>
+            <li>do/while</li>
+            <code>do statements while (expression);</code>
+            <li>for </li>
+            <code> for (initialize ; test ; increment) statement  </code><br/>
+            labled break: <code>label: for(...) { break/continue label; } </code>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+outer: for ( var i = 0; i< 4; ++i) {
+  for ( var j = 0; j< 4; ++j){
+    console.log("["+i+","+j+"]");
+    if (i === 1 && j === 1) {
+      break outer;
+    }
+  }
+}
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section  data-state="warningState">
+          <h3>For in Loops</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <code> for (key in object) </code><br/>
+            Warning:<br/>
+            <span class="warning">
+              <ol>
+                <li>Unordered  
+                <li>Use on simple data object only!
+                <li>Do not use on Array
+              </ol>
+            </span>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var objA = {
+  name: "objA"
+};
+objA.printName = function(){ console.log(this.name); };
+
+for (key in objA) {
+  console.log(key+ " : "+ objA[key]);
+}
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Return</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <code> return expression; </code><br/>
+          </div>
+          <div class="JSCodePad" style=" height:400px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+function returnByArg(arg) {
+  switch (arg){
+    case 0:
+      return 0;
+    case 1:
+      return "A";
+    case 2:
+      return;// return undefined if no expression
+  }
+}
+
+console.log( returnByArg(0) );
+console.log( returnByArg(1) );
+console.log( returnByArg(2) );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Exception</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>try/catch/finally</li>
+            <code> try{ statements }[ catch(exception){ statements } ] [ finally{ statements } ] </code><br/>
+            <li>throw</li>
+            <code>throw expression;</code><br/>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+try {
+  console.log( "before exception thrown" );
+  throw {
+    message: "exception throw!", 
+    code: 0xff
+  };
+  console.log( "after exception thrown" );
+} catch (e) {
+  console.log( "exception: " + e.message );
+} finally{
+  console.log( "finally" );
+}
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Note</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li><code><s>with</s></code> <span class="warning">(Unavaliable in strict mode!)</span></li>
+            <li>Optional Semicolons <span class="warning">(Add Semicolons always!)</span></li>
+            <li><span class="warning">K&amp;R Code Style is mandatory</span></li>
+            <li><span class="warning">Always add braces {} to loop and condition  </span></li>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// Semicolon automatically added after return case a bug.
+function foo(){
+  console.log("foo")
+  return
+  {
+    name : "bar"
+  }
+  // Use K&R Style to prevent above bug
+}
+
+console.log( foo().name );
+
+// miss semicommon on the end may cause bug
+var x = function(){
+}
+
+["abc","def"].forEach(function(item){
+});
+
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section data-state="warningState">
+          <h3>No block scope</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li><span class="warning">No block scope in ECMAScript!</span></li>
+            <li><span class="warning">Braces {} used both on block definition and object literal</span></li>
+          </div>
+          <div class="JSCodePad" style=" height:350px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+(function(){
+  for(var block1 = 0; block1<5; ++block1) {
+    var block2 = block1;
+  }
+  if (true) {
+    var block3 = 200;
+  } else {
+    var block4 = 300; // not assigned but declared
+  }
+
+  console.log( block1 );
+  console.log( block2 );
+  console.log( block3 );
+  console.log( block4 );
+})();
+console.log( block1 );
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+        </section>
+
+
+				<section>
+
+          <section>
+          <h2>Function</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Declaration and Expression</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Function Declaration</li>
+            <code> function foo( [argument list] ) { statements }</code><br/>
+            <li>Function Expression (lambda)</li>
+            <code>( function [bar] ( [argument list] ) { statements } )</code><br/>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+(function(){
+  var foo = 100;
+  function funcA() {
+    var bar = 200;
+    foo = 150;
+    return foo + bar;
+  }
+  var funcB = function funcB(){
+    var bar = 300;
+    return foo + bar;
+  };
+  var funcC = funcB;
+
+  console.log( funcA() );
+  console.log( funcC() );
+})();
+            
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Optional parameters</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Additional parameter set to undefined</li>
+            <li>Arguments Object for variable-length argument list</li>
+          </div>
+          <div class="JSCodePad" style=" height:400px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// use undefined to detect optional parameters
+function foo(a, b/*optional, default is 100*/) {
+  if (b === undefined) { b = 100; }
+  return a * b;
+}
+console.log( foo(5, 9) );
+console.log( foo(5) );
+
+// use arguments for any-length parameters
+function bar(){
+  for (var i=0; i<arguments.length; ++i) {
+    console.log("parameter["+i+"]:"+arguments[i]);
+  }
+}
+bar(1,2,"hello", {name: "obj"}, undefined);
+
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>Function is Object</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Function is object with:
+            <li>Internal [[call]] method</li>
+            <li>Internal scope context object</li>
+            <li>Internal JS code content</li>
+            <li>Other members</li>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+function foo(a,b){
+  return 100;
+}
+foo.bar = 200;
+
+console.log( foo.length );
+console.log( foo.bar ); 
+console.log( foo.name ); // NOT IN SPECIFICATION
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>Scope Chain and Closure</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li><span class="warning">No block scope</span></li>
+            <li>Variable locate through scope chain to the Global scope</li>
+            <li>Closure is created when the function object is created (not function variable stack)</li>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var p1 = 1;
+
+function foo(a1) {
+  var p2 = 10;
+
+  //closure is created when function created 
+  function bar(a2){
+    var p3 = 100;
+    console.log( p1 );
+    console.log( p2 );
+    console.log( p3 );
+
+    console.log( a1 );
+    console.log( a2 );
+    }
+  return bar;
+}
+
+var _bar = foo(5);
+_bar(7);
+
+// fix it
+/*
+for (var i=0; i<5; ++i) {
+  setTimeout( function(){
+    console.log(i);
+  },0); 
+//  console.log(100*i+50);
+}
+
+//console.log(65536);
+//*/
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Invocation</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Function Invocation</li>
+            <li>Method Invocation</li>
+            <li>Indirect Invocation</li>
+            <code> functionFoo.call( object [, arg1 [,arg2 ...]] ) </code><br/>
+            <code> functionFoo.apply( object [,argument list] ) </code><br/>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// Method invocation
+var foo = {
+  Name: "foo", id: 42, nickName: "bar",
+  // method Invocation
+  print: function(){
+    console.log( "I'm " + this.Name + "#"+ this.id );
+  }
+};
+
+foo.print();
+
+function printNickName(prefix){
+  console.log( prefix + this.nickName + "#" + this.id );
+}
+
+// indirect invocation
+printNickName.call( foo, "I'm " );
+printNickName.apply( foo, ["You'are "] );
+
+// fix it
+foo.postpondPrint = function(){
+  setTimeout( function(){
+    console.log( "postpond for : " + this.Name );
+  }, 1000 );
+};
+
+foo.postpondPrint();
+
+// method call on other object
+// var x=Object.prototype.toString.call( Math );
+// console.log(x);
+
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3><span style="text-transform:none">new</span> Invocation</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Function is used for class constructor and operator <code>new</code> is used for instantiation.<br/>
+            Warning: <br/>
+            <ul>
+              <li>Global Object will be polluted if operator <code>new</code> is missing
+              <li>Function may return another object
+            </ul>
+
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var classFoo = function(name){
+  this.instanceMember = 100;
+  this.instanceName = name;
+  this.print = function(){
+    console.log("instance: " + this.instanceName);
+  };
+  // return {}; 
+};
+
+var bar = new classFoo("objBar"),
+    bar2 = new classFoo("objBar2");
+
+bar.print();
+bar2.print();
+console.log(bar2.instanceMember);
+
+/* common bug and solution 
+// Bug: new is not used
+var bar3 = classFoo("objBar3");
+// instance variable added to global object
+console.log(window.instanceMember);
+bar3.print();
+// solution: 1. strict mode
+//           2. protection gate
+// if (!(this instanceof classFoo)) {return new classFoo(name);}
+//*/
+
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3>How <span style="text-transform:none">new</span> Works &amp; prototype</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Operator <code>new</code> create new object in several steps:
+            <ol>
+              <li>Create an empty object 
+              <li>Assign the internal variable [[prototype]] to Constructor.prototype</li>
+              <li>Constructor function is called on the new object</li>
+              <li>Return the new object(or the return value of function if an object is returned)</li>
+            </ol>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var classFoo = function(name){
+  this.instanceMember = 100;
+  this.instanceName = name;
+};
+
+classFoo.prototype = {
+  classMember : 200,
+  print : function(){
+    console.log("instance: " + this.instanceName);
+  }
+};
+
+var bar = new classFoo("objBar"),
+    bar2 = new classFoo("objBar2");
+
+bar.print();
+bar2.print();
+console.log(bar2.classMember);
+console.log(bar2.instanceMember);
+
+/* Create a new object manualy (not avaliable on IE)
+var bar3 = {};
+bar3.__proto__ = classFoo.prototype;
+classFoo.call(bar3, "objBar3")
+
+bar3.print();
+console.log(bar3.classMember);
+console.log(bar3.instanceMember);
+//*/
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>prototype chain</h3>
+            Prototype chain is a feature common used for class inheritance in ECMAScript
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// Simple Example
+function Animal(){
+}
+Animal.prototype = {
+  shout: function(){
+    console.log(this.name + ' shout:"' + this.voice + '"!'); 
+  }
+};
+
+function Cat(name){
+  // missing: call the constructor function of parent class
+  this.name = name;  
+}
+Cat.prototype = new Animal();
+Cat.prototype.voice="meow";
+
+var kitty = new Cat("kitty");
+var doraemon = new Cat("doraemon");
+kitty.shout();
+doraemon.shout();
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section data-state="warningState">
+          <h3>Extension of Native Prototypes</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Native Object can be extended by modify the prototype of there Native Constructors.<br/>
+            Note: Monkey patching on native object is not recommended, the only exception is backport the features of newer JavaScript specification.</li>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// example: extend native Function. NOT RECOMMENDED!
+function foo(){}
+var bar = "   bar   ";
+
+Function.prototype.showMe = function(){
+  console.log("It's function [" + this.name + "]");
+};
+
+foo.showMe();
+
+// example: backport new method in ECMA5 to ECMA3
+String.prototype.trim = function(){
+  return this.replace(/^\s*|\s*$/g, "");
+};
+console.log("[" + bar.trim() +"]");
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>More on prototype</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li><code>in</code> vs <code>hasOwnProperty</code>: prototype chain will not be checked for hasOwnPropert</li>
+            <li><code>instanceof</code>: check if the class function's prototype in the prototype chain</li>
+            <li><code>isPrototypeOf</code>(ECMA5): check for the instance</li>
+            <li><code>Object.getPrototypeOf</code>(ECMA5): get the prototype of an instance</li>
+          </div>
+          <div class="JSCodePad" style=" height:300px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+function Animal(){
+}
+Animal.prototype = { shout: function(){} };
+
+function Cat(name){ this.name = name; }
+Cat.prototype = new Animal();
+Cat.prototype.voice="meow";
+
+var kitty = new Cat("kitty");
+
+console.log("in: " + ("voice" in kitty));
+console.log("hasOwnPropert: " + 
+  kitty.hasOwnProperty("voice"));
+  
+console.log("instanceof: " + 
+  (kitty instanceof Animal));
+  
+console.log("isPrototypeOf: " + 
+  Animal.prototype.isPrototypeOf(kitty));
+
+
+var kitty_Proto_ = Object.getPrototypeOf(kitty);
+console.log("Object.getPrototypeOf: " +kitty_Proto_);
+
+console.log("Object.getPrototypeOf is Animal:" +
+  (kitty_Proto_ === Animal.prototype));
+console.log("Object.getPrototypeOf is Animal:" +
+  (kitty_Proto_ === Cat.prototype));
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+        </section>
+
+
+				<section>
+
+          <section>
+          <h2>Built-in Object</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Global Object</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            The root object of ECMAScript environment. <code>window</code> in browser and <code>global</code> in nodejs.
+
+            <li>Value properties</li>
+            <code> NaN Infinity undefined </code>
+
+            <li>Function properties</li>
+            <code> eval() </code> <br/>
+            <code> parseInt(string, radix) parseFloat(string) isNaN(number) isFinite(number) </code><br/>
+            <code> decodeURI(encodedURI) encodeURI(uri) decodeURIComponent(encodedURIComponent) encodeURIComponent(uriComponent) <br/> <s>escape/unescape</s> </code><br/>
+
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3><span style="text-transform:none">Object</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Constructor methods: <span class="warning">(ECMA5 Only)</span>
+            <li>Property related</li>
+            <code> defineProperty defineProperties getOwnPropertyDescriptor getOwnPropertyNames </code>
+            <li>Internal state</li>
+            <code>freeze isFrozen preventExtensions isExtensible seal isSealed</code>
+            <li>Others</li>
+            <code> getPrototypeOf create keys </code>
+          </div>
+          </section>
+
+
+          <section>
+          <h3><span style="text-transform:none">Object</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype methods
+            <li><code>constructor</code></li>
+            <li><code>toString</code></li>
+            <li><code>toLocaleString</code></li>
+            <li><code>valueOf</code></li>
+            <li><code>hasOwnProperty</code></li>
+            <li><code>propertyIsEnumerable</code></li>
+            <li><code>isPrototypeOf</code>(ECMA5)</li>
+          </div>
+          </section>
+
+          <section>
+          <h3><span style="text-transform:none">Array</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <li>Literal <span class="warning">(NOTE: Always use literal instead of constructor to create array)</span></li>
+            <code>[value1, value2, ...]</code>
+            <li>Constructor methods:</li>
+            <code>isArray</code>(ECMA5)
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="width:100%;text-align:left; line-height:normal;">// Length is 3.
+var a1 = new Array(x1, x2, x3);
+
+// Length is 2.
+var a2 = new Array(x1, x2);
+
+// If x1 is a number and it is a natural number the length will be x1.
+// If x1 is a number but not a natural number this will throw an exception.
+// Otherwise the array will have one element with x1 as its value.
+var a3 = new Array(x1);
+
+// Length is 0.
+var a4 = new Array();
+            </xmp>
+            <div class="output" editable="true" style="display:none"> </div>
+            <div class="run" style="display:none">run</div>
+          </div>
+          </section>
+          
+          <section>
+          <h3><span style="text-transform:none">Array</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype variables and methods
+            <li>Variables</li>
+            <code>length</code>
+            <li>Methods will generate a new Array</li>
+            <code>concat slice</code>
+            <li>Methods will modify the Array itself</li>
+            <code>pop push shift unshift splice reverse sort</code><span style="color:darkred">(unstable, string comparison default)</span>
+            <li>Methods to convert to string</li>
+            <code>toString join</code>
+            <li>New methods in ECMA5 (implemented in es5-polyfill)</li>
+            <code>indexOf lastIndexof every some forEach map filter <span style="color:darkred">reduce reduceRight</span></code>
+          </div>
+          </section>
+
+          <section>
+          <h3><span style="text-transform:none">Array</span> Objects</h3>
+          <div style="text-align:left; font-size:0.6em;line-height: normal;">
+            Note:
+            <li>Do not use <code>for ( ... in ...)</code> loop on Array object, elements may be unordered, methods on polyfill may be enumerated.</li>
+            <li><code>typeof</code> method is not working for type check, use <code>Object.prototype.toString.call()</code> instead (or <code>Array.isArray</code> if ECMA5 is avaliable). </li>
+            <li>Methods are working on other Array-like object too. </li>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// Object.prototype.toString.call()
+console.log(Object.prototype.toString.call([]));
+console.log(Object.prototype.toString.call(/ /));
+console.log(Object.prototype.toString.call(new Date()));
+
+// Array-like oObject
+var foo = {
+  0: { bar: 100, name: "A" },
+  1: { bar: 300, name: "B" },
+  2: { bar: 200, name: "C" },
+  length : 3
+};
+
+Array.prototype.sort.call(foo, function(a,b){
+  return a.bar > b.bar ? 1 : a.bar < b.bar? -1 : 0;
+});
+
+console.log(JSON.stringify(foo, null, "  "));
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Primitive type wrappers</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            There are three primitive type wrappers in ECMAScript make primitive types working like Object.
+            <li><code>String</code></li>
+            <li><code>Number</code></li>
+            <li><code>Boolean</code></li>
+            Automatiocally boxing: primitive value will be boxing to object wrapper when method or variable propertie is invoced.<br/>
+            <span class="warning">Note: Do not use <code style="text-transform:none">new</code> to create primitive wrapper!</span>
+          </div>
+          <div class="JSCodePad" style=" height:150px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+// same
+console.log( true.toString() );
+console.log(new Boolean(true).toString());
+
+console.log( "abc".length );
+console.log( 12..toFixed(3) );
+
+// DO NOT USE new TO CREATE PRIMITIVE WRAPPER
+var foo = new String("foo");
+var bar = new Boolean(false);
+var foobar = new Number(123);
+console.log( typeof foo );
+console.log( typeof bar );
+console.log( typeof foobar );
+if (bar) {
+  console.warn( "it's false!" );
+}
+
+// Used for type conversion is OK but not recommended
+var x = Number("123");
+// console.log( typeof x );
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>Type wrapper:<span style="text-transform:none">String</span></h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Constructor methods: </span>
+            <li>Generate character from unicode</li>
+            <code> fromCharCode() </code>
+          </div>
+          <div class="JSCodePad" style=" height:200px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+console.log( String.fromCharCode( 0x597d ) );
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run">run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Type wrapper:<span style="text-transform:none">String</span></h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype methods:
+            <li>Generate a new String</li>
+            <code> charAt concat replace slice(start, end) substring(start, end) toLowerCase toUpperCase <span style="color:darkred">trim()</span> <s>substr</s></code>
+            <li>Return other value</li>
+            <code>indexOf lastIndexOf search(regexp) match(regexp) localeCompare charCodeAt<span style="color:darkred">([])</span> split(seperator)  </code><br/>
+            Portotype variables: <br/>
+            <code> length </code>
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3>Type wrapper:<span style="text-transform:none">Number</span></h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Constructor variable properties: </span>
+
+            <li><code>MAX_VALUE</code> : 1.7976931348623157*10<sup>308</sup></li>
+            <li><code>MIN_VALUE</code> : 5*10<sup>324</sup></li>
+            <li><code>NaN</code></li>
+            <li><code>NEGATIVE_INFINITY</code></li>
+            <li><code>POSITIVE_INFINITY</code></li>
+          </div>
+          </section>
+
+          <section>
+          <h3>Type wrapper:<span style="text-transform:none">Number</span></h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype methods for string format:
+            <li><code>toString( [ radix ] )</code></li>
+            <li><code>toFixed(fractionDigits)</code></li>
+            <li><code>toExponential (fractionDigits)</code></li>
+            <li><code>toPrecision (precision)</code></li>
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3>Type wrapper:<span style="text-transform:none">Boolean</span></h3>
+          <br/>
+          Nothing special.
+          </section>
+
+          <section>
+          <h3><span style="text-transform:none">Function</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype methods and variable properties:
+            <li><code>length</code></li>
+            <li><code>toString</code></li>
+            <li><code>apply</code></li>
+            <li><code>call</code></li>
+            <li><code>bind</code> <span style="color: darkred;">(ECMA5, implemented in es5-polyfill)</span></li>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var foo={
+  name: "bar",
+  value: 100
+}
+function printMe(){
+  console.log( this.name+ " " + this.value);
+}
+
+var wrapper = printMe.bind(foo);
+wrapper();
+
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+          </section>
+          
+
+
+          <section>
+          <h3><span style="text-transform:none">Date</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Constructors:
+
+            <li><code>new Date (year, month [, date [, hours [, minutes [, seconds [, ms ] ] ] ] ] ) </code><span style="color:darkred">(Note: local time)</span></li>
+            <li><code>new Date (value) </code>(value can be Date String or number)</li><br/>
+
+            Constructor methods: </span>
+            <li><code> parse(string) </code> Parse Date String to number(milliseconds)</li>
+            <li><code> UTC(year, month [, date [, hours [, minutes [, seconds [, ms ] ] ] ] ] )</code> Return a number(milliseconds) </li>
+            <li><code> now()</code> Return the current time in number(ms)</code></li>
+
+          </div>
+          </section>
+
+
+          <section>
+          <h3><span style="text-transform:none">Date</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype methods:
+            <li>String formatter</li>
+            <code> toDateString() toTimeString() toISOString() toJSON() </code>
+            <li>Value manipulate</li>
+            <code> (get/set)FullYear, Month, Date, Day, Hours, Minutes, Seconds, MilliSeconds </code><br/>
+            <code> (getUTC/setUTC)FullYear, Month, Date, Day, Hours, Minutes, Seconds, MilliSeconds </code><br/>
+            <code> getTime/setTime <s>getYear/setYear</s></code>
+            <li>Other</li>
+            <code> getTimezoneOffset </code>
+          </div>
+          </section>
+
+
+          <section>
+          <h3><span style="text-transform:none">RegExp</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Literal
+            <li><code>/[RegExp pattern]/[gmi]</code></li>
+            Constructor
+            <li><code>new RegExp(pattern, flags)</code></li>
+            Portotype methods:
+            <li><code> exec() test()</code></li>
+            Regexp instance variable properties:
+            <li><code> global ignoreCase multiline lastIndex source </code></li>
+
+          </div>
+          </section>
+
+
+
+          <section>
+          <h3><span style="text-transform:none">Error</span> Objects</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Portotype variable properties:
+            <li><code> name message </code></li>
+            Built-in Error Types:
+            <li><code>EvalError RangeError ReferenceError SyntaxError TypeError URIError </code></li>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>The <span style="text-transform:none">Math</span> Object</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Constants
+            <li><code> E LN10 LN2 LOG2E LOG10E PI SQRT1_2 SQRT2</code></li>
+            Functions
+            <li>Trigonometric functions</li>
+            <code>sin(x) cos(x) tan(x) asin(x) acos(x) atan(x) atan2(y,x)</code>
+            <li>Arithmetic functions</li>
+            <code>pow(x,y) sqrt(x) exp(x) log(x) abs(x) floor(x) ceil(x) round(x)</code>
+            <li>Other functions</li>
+            <code>max ([ value1 [ , value2 [ , … ] ] ])</code></br>
+            <code>min ([ value1 [ , value2 [ , … ] ] ])</code></br>
+            <code>random ()</code></br>
+          </div>
+          </section>
+
+
+          <section>
+          <h3>The <span style="text-transform:none">JSON</span> Object</h3>
+          JSON (JavaScript Object Notation) is a lightweight data-interchange format (<a href="http://www.json.org/">http://www.json.org/</a>).
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Functions
+            <li><code>parse(text, [receiver])</code></li>
+            <li><code>stringify ( value [ , replacer [ , space ] ] )</code></li>
+          </div>
+          <div class="JSCodePad" style=" height:150px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var foo = JSON.parse('{"foo":100,"bar":{"a":"string"}}');
+console.log( foo.foo );
+console.log( JSON.stringify(foo.bar, null, "  ") );
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+          </section>
+
+        </section>
+
+
+
+
+				<section>
+
+          <section>
+          <h2>Best Practices</h2>
+          <br/>
+          </section>
+
+          <section>
+          <h3>Use <span style="text-transform:none">JSLint/JSHint</span></h3>
+          <a href="http://www.jslint.com/">JSLint</a> or <a href="http://www.jshint.com/">JSHint</a> 
+          to check several potential bug on the code(Used on the embeded code editor too).<br/>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            To prevent:<br/>
+            <ul>
+              <li> Missing semicolons
+              <li> Risky code
+            </ul>
+          </div>
+          <div class="JSCodePad" style=" height:250px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+var x // semicolons missing
+
+if ( a == false) {
+// a may be 0, undefined ,etc.
+}
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+
+          </section>
+
+          <section>
+          <h3>Do not</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Use <code>with(){}</code>
+              <li> Use <code>eval()</code>(except for deserialization)
+              <li> Modifying prototypes of builtin objects (especially on Object.prototype and Array.prototype)
+              <li> Wrapper objects for primitive types
+              <li> Use <code>for-in</code> loop for complex object or array
+            </ul>
+          </div>
+          </section>
+
+          <section>
+          <h3>Always</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Explicit scope
+              <li> K&amp;R Code Style (curly braces on line end)
+              <li> Use JSHint/JSLint to check the code before submit
+            </ul>
+          </div>
+          </section>
+
+          <section>
+          <h3>Tricks</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Use <code>val ? foo : bar</code>
+              <li> &amp;&amp; and || for shorten code<br/>
+              <code> foo&amp;&amp;foo.bar&amp;&amp;foo.bar.method() </code><br/>
+              <code> var defaultValue = foo || 100; </code>
+            </ul>
+          </div>
+          </section>
+
+
+				</section>
+
+				<section>
+          <section>
+          <h3>Reference</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            Basic:<br/>
+            <ul>
+              <li><a href="http://shop.oreilly.com/product/9780596805531.do">JavaScript: The Definitive Guide, 6th Edition</a>(book)</li>
+              <li><a href="http://eloquentjavascript.net/"> Eloquent JavaScript</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/learn/javascript">MDN: LEARN JAVASCRIPT</a></li>
+              <li><a href="http://www.w3schools.com/js/default.asp">w3schools</a></li>
+            </ul>
+            <br/>
+            Advanced:<br/>
+            <ul>
+              <li><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">Standard ECMA-262 ECMAScript Language Specification </a>(pdf)</li>
+              <li><a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a>(book)</li>
+              <li><a href="http://shop.oreilly.com/product/9780596806767.do">JavaScript Patterns</a>(book)</li>
+              <li><a href="http://bonsaiden.github.com/JavaScript-Garden/">JavaScript Garden</a></li>
+              <li><a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google JavaScript Style Guide</a></li>
+
+            </ul>
+          </div>
+          </section>
+
+				</section>
+
+
+
+        <section>
+          <h1>THE END</h1>
+          <h3>BY Jianrong Yu</h3>
+        </section>
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Javascrip Console</h2>                                                                                                                                                                                                                -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with                                                                                                                             -->
+<!--             support for CSS 3D transforms to see it in its full glory.                                                                                                                                                                              -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <div class="JSConsole">                                                                                                                                                                                                                   -->
+<!--             <div class="output" style="height: 200px;" editable="true"> </div>                                                                                                                                                                      -->
+<!--             <input type="text"></input>                                                                                                                                                                                                             -->
+<!--           </div>                                                                                                                                                                                                                                    -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Heads Up</h2>                                                                                                                                                                                                                         -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with                                                                                                                             -->
+<!--             support for CSS 3D transforms to see it in its full glory.                                                                                                                                                                              -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <div class="JSConsole">                                                                                                                                                                                                                   -->
+<!--             <div class="output" style="height: 200px;" editable="true"> </div>                                                                                                                                                                      -->
+<!--             <input type="text"></input>                                                                                                                                                                                                             -->
+<!--           </div>                                                                                                                                                                                                                                    -->
+
+<!--           <aside class="notes">                                                                                                                                                                                                                     -->
+<!--             Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).                                                                             -->
+<!--           </aside>                                                                                                                                                                                                                                  -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Heads Down</h2>                                                                                                                                                                                                                       -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with                                                                                                                             -->
+<!--             support for CSS 3D transforms to see it in its full glory.                                                                                                                                                                              -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <div class="JSCodePad" style=" height:250px;">                                                                                                                                                                                            -->
+<!--             <xmp class="code" style="text-align:left; line-height:normal;">                                                                                                                                                                         -->
+<!-- function foo(items) {                                                                                                                                                                                                                               -->
+<!--   var i;                                                                                                                                                                                                                                            -->
+<!--   for (i = 0; i &lt; items.length; i++) {                                                                                                                                                                                                           -->
+<!--     alert("Ace Rocks " + items[i]);                                                                                                                                                                                                                 -->
+<!--   }                                                                                                                                                                                                                                                 -->
+<!-- }                                                                                                                                                                                                                                                   -->
+<!--             </xmp>                                                                                                                                                                                                                                  -->
+<!--             <div class="output" editable="true"> </div>                                                                                                                                                                                             -->
+<!--             <div class="run">run</div>                                                                                                                                                                                                              -->
+<!--           </div>                                                                                                                                                                                                                                    -->
+
+<!--           <aside class="notes">                                                                                                                                                                                                                     -->
+<!--             Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).                                                                             -->
+<!--           </aside>                                                                                                                                                                                                                                  -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         |+ Example of nested vertical slides +|                                                                                                                                                                                                     -->
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Vertical Slide <br/>                                                                                                                                                                                                                -->
+<!--           Vertical Slides</h2>                                                                                                                                                                                                                      -->
+<!--             <p>                                                                                                                                                                                                                                     -->
+<!--               Slides can be nested inside of other slides,                                                                                                                                                                                          -->
+<!--               try pressing <a href="#" class="navigate-down">down</a>.                                                                                                                                                                              -->
+<!--             </p>                                                                                                                                                                                                                                    -->
+<!--             <a href="#" class="image navigate-down">                                                                                                                                                                                                -->
+<!--               <img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">                                                                                                                       -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Basement Level 1</h2>                                                                                                                                                                                                               -->
+<!--             <p>Press down or up to navigate.</p>                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Basement Level 2</h2>                                                                                                                                                                                                               -->
+<!--             <p>Cornify</p>                                                                                                                                                                                                                          -->
+<!--             <a class="test" href="http://cornify.com">                                                                                                                                                                                              -->
+<!--               <img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">                                                                                                                        -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Basement Level 3</h2>                                                                                                                                                                                                               -->
+<!--             <p>That's it, time to go back up.</p>                                                                                                                                                                                                   -->
+<!--             <a href="#/2" class="image">                                                                                                                                                                                                            -->
+<!--               <img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">                                                                              -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Point of View</h2>                                                                                                                                                                                                                    -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             Press <strong>ESC</strong> to enter the slide overview. Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.                         -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>rvl.io</h2>                                                                                                                                                                                                                           -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             If you don't like writing slides in HTML you can use the online editor <a href="http://www.rvl.io" target="_blank">rvl.io</a>.                                                                                                          -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Works in Mobile Safari</h2>                                                                                                                                                                                                           -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             Try it out! You can swipe through the slides and pinch your way to the overview.                                                                                                                                                        -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Marvelous Unordered List</h2>                                                                                                                                                                                                         -->
+<!--           <ul>                                                                                                                                                                                                                                      -->
+<!--             <li>No order here</li>                                                                                                                                                                                                                  -->
+<!--             <li>Or here</li>                                                                                                                                                                                                                        -->
+<!--             <li>Or here</li>                                                                                                                                                                                                                        -->
+<!--             <li>Or here</li>                                                                                                                                                                                                                        -->
+<!--           </ul>                                                                                                                                                                                                                                     -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Fantastic Ordered List</h2>                                                                                                                                                                                                           -->
+<!--           <ol>                                                                                                                                                                                                                                      -->
+<!--             <li>One is smaller than...</li>                                                                                                                                                                                                         -->
+<!--             <li>Two is smaller than...</li>                                                                                                                                                                                                         -->
+<!--             <li>Three!</li>                                                                                                                                                                                                                         -->
+<!--           </ol>                                                                                                                                                                                                                                     -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section data-markdown>                                                                                                                                                                                                                     -->
+<!--           <script type="text/template">                                                                                                                                                                                                             -->
+<!--             ## Markdown support                                                                                                                                                                                                                     -->
+
+<!--             For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).                                                                                         -->
+
+<!--               <section data-markdown>                                                                                                                                                                                                               -->
+<!--                 ## Markdown support                                                                                                                                                                                                                 -->
+
+<!--                 For those of you who like that sort of thing.                                                                                                                                                                                       -->
+<!--                 Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).                                                                                                                                   -->
+<!--               </section>                                                                                                                                                                                                                            -->
+<!--           </script>                                                                                                                                                                                                                                 -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section id="transitions">                                                                                                                                                                                                                  -->
+<!--           <h2>Transition Styles</h2>                                                                                                                                                                                                                -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             You can select from different transitions, like: <br>                                                                                                                                                                                   -->
+<!--             <a href="?transition=cube#/transitions">Cube</a> -                                                                                                                                                                                      -->
+<!--             <a href="?transition=page#/transitions">Page</a> -                                                                                                                                                                                      -->
+<!--             <a href="?transition=concave#/transitions">Concave</a> -                                                                                                                                                                                -->
+<!--             <a href="?transition=zoom#/transitions">Zoom</a> -                                                                                                                                                                                      -->
+<!--             <a href="?transition=linear#/transitions">Linear</a> -                                                                                                                                                                                  -->
+<!--             <a href="?transition=none#/transitions">None</a> -                                                                                                                                                                                      -->
+<!--             <a href="?#/transitions">Default</a>                                                                                                                                                                                                    -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section id="themes">                                                                                                                                                                                                                       -->
+<!--           <h2>Themes</h2>                                                                                                                                                                                                                           -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             Reveal.js comes with a few themes built in: <br>                                                                                                                                                                                        -->
+<!--             <a href="?theme=sky#/themes">Sky</a> -                                                                                                                                                                                                  -->
+<!--             <a href="?theme=beige#/themes">Beige</a> -                                                                                                                                                                                              -->
+<!--             <a href="?theme=simple#/themes">Simple</a> -                                                                                                                                                                                            -->
+<!--             <a href="?theme=serif#/themes">Serif</a> -                                                                                                                                                                                              -->
+<!--             <a href="?theme=night#/themes">Night</a> -                                                                                                                                                                                              -->
+<!--             <a href="?#/themes">Default</a>                                                                                                                                                                                                         -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             <small>                                                                                                                                                                                                                                 -->
+<!--               * Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.                                                  -->
+<!--             </small>                                                                                                                                                                                                                                -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <section data-state="alert">                                                                                                                                                                                                              -->
+<!--             <h2>Global State</h2>                                                                                                                                                                                                                   -->
+<!--             <p>                                                                                                                                                                                                                                     -->
+<!--               Set <code>data-state="something"</code> on a slide and <code>"something"</code>                                                                                                                                                       -->
+<!--               will be added as a class to the document element when the slide is open. This lets you                                                                                                                                                -->
+<!--               apply broader style changes, like switching the background.                                                                                                                                                                           -->
+<!--             </p>                                                                                                                                                                                                                                    -->
+<!--             <a href="#" class="image navigate-down">                                                                                                                                                                                                -->
+<!--               <img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">                                                                                                                       -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section data-state="blackout">                                                                                                                                                                                                           -->
+<!--             <h2>"blackout"</h2>                                                                                                                                                                                                                     -->
+<!--             <a href="#" class="image navigate-down">                                                                                                                                                                                                -->
+<!--               <img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">                                                                                                                       -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section data-state="soothe">                                                                                                                                                                                                             -->
+<!--             <h2>"soothe"</h2>                                                                                                                                                                                                                       -->
+<!--             <a href="#" class="image navigate-next">                                                                                                                                                                                                -->
+<!--               <img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(-90deg);">                                                                              -->
+<!--             </a>                                                                                                                                                                                                                                    -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section data-state="customevent">                                                                                                                                                                                                          -->
+<!--           <h2>Custom Events</h2>                                                                                                                                                                                                                    -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.                                                                                                                        -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {                                                                                                                -->
+<!--   console.log( '"customevent" has fired' );                                                                                                                                                                                                         -->
+<!-- } );                                                                                                                                                                                                                                                -->
+<!--           </code></pre>                                                                                                                                                                                                                             -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Clever Quotes</h2>                                                                                                                                                                                                                    -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">                                                                                         -->
+<!--             The nice thing about standards is that there are so many to choose from</q> and block:                                                                                                                                                  -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">                                                                                                                        -->
+<!--             For years there has been a theory that millions of monkeys typing at random on millions of typewriters would                                                                                                                            -->
+<!--             reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.                                                                                                                                            -->
+<!--           </blockquote>                                                                                                                                                                                                                             -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Pretty Code</h2>                                                                                                                                                                                                                      -->
+<!--           <pre><code contenteditable>                                                                                                                                                                                                               -->
+<!-- function linkify( selector ) {                                                                                                                                                                                                                      -->
+<!--   if( supports3DTransforms ) {                                                                                                                                                                                                                      -->
+
+<!--     var nodes = document.querySelectorAll( selector );                                                                                                                                                                                              -->
+
+<!--     for( var i = 0, len = nodes.length; i &lt; len; i++ ) {                                                                                                                                                                                         -->
+<!--       var node = nodes[i];                                                                                                                                                                                                                          -->
+
+<!--       if( !node.className ) ) {                                                                                                                                                                                                                     -->
+<!--         node.className += ' roll';                                                                                                                                                                                                                  -->
+<!--       }                                                                                                                                                                                                                                             -->
+<!--     };                                                                                                                                                                                                                                              -->
+<!--   }                                                                                                                                                                                                                                                 -->
+<!-- }                                                                                                                                                                                                                                                   -->
+<!--           </code></pre>                                                                                                                                                                                                                             -->
+<!--           <p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>                                                                                                                                  -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Intergalactic Interconnections</h2>                                                                                                                                                                                                   -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             You can link between slides internally,                                                                                                                                                                                                 -->
+<!--             <a href="#/2/3">like this</a>.                                                                                                                                                                                                          -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Fragmented Views</h2>                                                                                                                                                                                                               -->
+<!--             <p>Hit the next arrow...</p>                                                                                                                                                                                                            -->
+<!--             <p class="fragment">... to step through ...</p>                                                                                                                                                                                         -->
+<!--             <ol>                                                                                                                                                                                                                                    -->
+<!--               <li class="fragment"><code>any type</code></li>                                                                                                                                                                                       -->
+<!--               <li class="fragment"><em>of view</em></li>                                                                                                                                                                                            -->
+<!--               <li class="fragment"><strong>fragments</strong></li>                                                                                                                                                                                  -->
+<!--             </ol>                                                                                                                                                                                                                                   -->
+
+<!--             <aside class="notes">                                                                                                                                                                                                                   -->
+<!--               This slide has fragments which are also stepped through in the notes window.                                                                                                                                                          -->
+<!--             </aside>                                                                                                                                                                                                                                -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--           <section>                                                                                                                                                                                                                                 -->
+<!--             <h2>Fragment Styles</h2>                                                                                                                                                                                                                -->
+<!--             <p>There's a few styles of fragments, like:</p>                                                                                                                                                                                         -->
+<!--             <p class="fragment grow">grow</p>                                                                                                                                                                                                       -->
+<!--             <p class="fragment shrink">shrink</p>                                                                                                                                                                                                   -->
+<!--             <p class="fragment roll-in">roll-in</p>                                                                                                                                                                                                 -->
+<!--             <p class="fragment fade-out">fade-out</p>                                                                                                                                                                                               -->
+<!--             <p class="fragment highlight-red">highlight-red</p>                                                                                                                                                                                     -->
+<!--             <p class="fragment highlight-green">highlight-green</p>                                                                                                                                                                                 -->
+<!--             <p class="fragment highlight-blue">highlight-blue</p>                                                                                                                                                                                   -->
+<!--           </section>                                                                                                                                                                                                                                -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Spectacular image!</h2>                                                                                                                                                                                                               -->
+<!--           <a class="image" href="http://lab.hakim.se/meny/" target="_blank">                                                                                                                                                                        -->
+<!--             <img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">                                                                                                                          -->
+<!--           </a>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Export to PDF</h2>                                                                                                                                                                                                                    -->
+<!--           <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>                                                                        -->
+<!--           <iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe> -->
+<!--           <script>                                                                                                                                                                                                                                  -->
+<!--             document.getElementById('slideshare').attributeName = 'allowfullscreen';                                                                                                                                                                -->
+<!--           </script>                                                                                                                                                                                                                                 -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Take a Moment</h2>                                                                                                                                                                                                                    -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen                                                                                             -->
+<!--             during a presentation.                                                                                                                                                                                                                  -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>Stellar Links</h2>                                                                                                                                                                                                                    -->
+<!--           <ul>                                                                                                                                                                                                                                      -->
+<!--             <li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>                                                                                                                                                       -->
+<!--             <li><a href="http://hakim.se/projects/reveal-js">Leave feedback on my site</a></li>                                                                                                                                                     -->
+<!--             <li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>                                                                                                                                                                  -->
+<!--           </ul>                                                                                                                                                                                                                                     -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h2>It's free</h2>                                                                                                                                                                                                                        -->
+<!--           <p>                                                                                                                                                                                                                                       -->
+<!--             reveal.js and <a href="http://www.rvl.io">rvl.io</a> are entirely free but if you'd like to support the projects you can donate below.                                                                                                  -->
+<!--             Donations will go towards hosting and domain costs.                                                                                                                                                                                     -->
+<!--           </p>                                                                                                                                                                                                                                      -->
+<!--           <form action="https://www.paypal.com/cgi-bin/webscr" method="post">                                                                                                                                                                       -->
+<!--             <input type="hidden" name="cmd" value="_donations">                                                                                                                                                                                     -->
+<!--             <input type="hidden" name="business" value="hakim.elhattab@gmail.com">                                                                                                                                                                  -->
+<!--             <input type="hidden" name="lc" value="US">                                                                                                                                                                                              -->
+<!--             <input type="hidden" name="item_name" value="reveal.js / rvl.io">                                                                                                                                                                       -->
+<!--             <input type="hidden" name="no_note" value="0">                                                                                                                                                                                          -->
+<!--             <input type="hidden" name="currency_code" value="USD">                                                                                                                                                                                  -->
+<!--             <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">                                                                                                                                                 -->
+<!--             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">                                                                     -->
+<!--           </form>                                                                                                                                                                                                                                   -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+<!--         <section>                                                                                                                                                                                                                                   -->
+<!--           <h1>THE END</h1>                                                                                                                                                                                                                          -->
+<!--           <h3>BY Hakim El Hattab / hakim.se</h3>                                                                                                                                                                                                    -->
+<!--         </section>                                                                                                                                                                                                                                  -->
+
+			</div>
+
+		</div>
+
+
+    <div id="testground">
+      <div class="mask">
+      </div>
+
+      <div class="pad" data-type="console">
+        <div class="closeButton">╋</div>
+
+        <div class="container">
+          <div class="console">
+            <div class="title">ECMAScript Console</div>
+
+            <div class="switchToPad switchbutton"> Switch To Code Pad</div>
+
+            <div class="JSConsole">
+              <div class="output" editable="true"> </div>
+              <input type="text"></input>
+            </div>
+
+          </div>
+
+          <div class="codepad">
+            <div class="title">ECMAScript Code pad</div>
+
+            <div class="switchToConsole switchbutton"> Switch To Console</div>
+
+            <div class="JSCodePad" >
+              <xmp class="code" style="text-align:left; line-height:normal;">
+console.log("hello");
+              </xmp>
+              <div class="output" editable="true"> </div>
+              <div class="run">run</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="startButton">
+      </div>
+    </div>
+
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: false,
+
+				theme: "beige", // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+        <!-- dependencies: [                                                                                                            -->
+        <!--   { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },                              -->
+        <!--   { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }, -->
+        <!--   { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }, -->
+        <!--   { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },          -->
+        <!--   { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },             -->
+        <!--   { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }               -->
+        <!--   // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }        -->
+        <!-- ]                                                                                                                          -->
+			});
+
+		</script>
+
+	</body>
+</html>

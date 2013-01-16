@@ -1,0 +1,340 @@
+
+.warning {
+  color: darkred;
+  text-transform: uppercase;
+}
+
+.warningState .reveal .state-background {
+  background-color: rgb(255, 199, 199)!important;
+}
+
+
+
+.JSConsole > input,
+.JSConsole > .output{
+  width:90%;
+  display:block;
+  margin: 5px auto 0 auto;
+
+	text-align: left;
+	font-size: 0.55em;
+	font-family: monospace;
+	line-height: 1.2em;
+
+	word-wrap: break-word;
+
+	box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+}
+
+.JSConsole > .output{
+  background-color:white;
+  border:1px solid grey;
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+
+.JSCodePad .error,
+.JSConsole  .error{
+  color: darkred;
+}
+
+.JSCodePad .warning,
+.JSConsole  .warning{
+  color: darkgoldenrod;
+  text-transform: none;
+}
+
+.JSConsole  xmp{
+  margin: 3px 0;
+}
+
+.JSCodePad {
+  width: 100%;
+  position: relative;
+  margin-top: 30px !important;
+}
+
+
+.JSCodePad > .code ,
+.JSCodePad > .output{
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  width:35%;
+  border:1px solid grey;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+  font-size: 16px;
+}
+
+.JSCodePad > .code {
+  width:65%;
+  left: 0;
+  margin: 0;
+}
+
+
+.JSCodePad > .output{
+  right: 0;
+  background-color:white;
+  overflow-y: auto;
+  overflow-x:hidden;
+  /* margin: 12px 0; */
+
+	text-align: left;
+
+  /* font-size: 0.55em; */
+  /* font-family: monospace; */
+	line-height: 1.2em;
+
+	word-wrap: break-word;
+
+  font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+}
+
+.JSCodePad > .run{
+  position:absolute;
+  right: 35%;
+  /* top: -6px; */
+  /* height: 18px; */
+  bottom: 100%;
+  background-color: #bbbbff;
+  border-radius: 3px;
+  border:1px solid black;
+  padding:1px 20px;
+  transition: all 400ms;
+  -webkit-transition: all 200ms;
+
+	font-size: 0.55em;
+	font-family: monospace;
+	line-height: 1.2em;
+
+	word-wrap: break-word;
+	box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.JSCodePad > .run:hover{
+  background-color: #ddddff;
+}
+
+
+.ace_gutter-cell {
+    padding-left: 19px !important;
+}
+
+#testground {
+    position: fixed;
+
+    left: -100%;
+    width: 100%;
+    top: 0;
+    bottom:0;
+    z-index: 1000;
+
+    -webkit-transition-duration: 250ms;
+    transition-duration: 450ms;
+
+}
+
+#testground.show {
+    left: 0;
+}
+
+#testground.show>.startButton {
+    opacity: 0;
+}
+
+#testground>.startButton {
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    background-color:red;
+
+    border-radius: 0 30px 0 0;
+    box-shadow: 0 0 10px 10px red;
+    -webkit-transition-duration: 250ms;
+    transition-duration: 250ms;
+    opacity: 0.3;
+}
+
+#testground>.startButton:hover {
+
+    box-shadow: 0 0 30px 30px red;
+    opacity: 1;
+}
+
+#testground>.mask{
+    position: absolute;
+    margin: 0px;
+    background-color: transparent;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 2000;
+}
+
+#testground>.pad {
+    position: absolute;
+    margin: 80px;
+    background-color: white;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2100;
+    box-shadow: 10px 10px 40px 0px black;
+}
+
+#testground > .pad>.closeButton{
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 2px solid black;
+    box-shadow: 0 0 4px 2px black;
+    overflow: hidden;
+    font-size: 30px;
+    font-family: SimSun, SongTi;
+    text-align: center;
+    -webkit-transform: translate(50%, -50%) rotate(45deg);
+    transform: translate(50%, -50%) rotate(45deg);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+    overflow:hidden;
+    cursor: pointer;
+    z-index:100000;
+}
+
+#testground > .pad>.closeButton:hover{
+    box-shadow: 0 0 10px 3px black;
+}
+
+#testground>.pad>.container{
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+#testground>.pad>.container .title{
+    font-family: "League Gothic", Impact, sans-serif;
+    float:left;
+    font-size:30px;
+}
+
+#testground>.pad[data-type="console"] .console {
+    top: 0;
+    bottom: 0;
+}
+
+#testground>.pad[data-type="console"] .codepad {
+    top: 100%;
+    bottom: -100%;
+}
+
+#testground>.pad[data-type="codepad"] .console {
+    top: -100%;
+    bottom: 100%;
+}
+
+#testground>.pad[data-type="codepad"] .codepad {
+    top: 0;
+    bottom: 0;
+}
+
+#testground>.pad .console,
+#testground>.pad .codepad{
+    position: absolute;
+    margin: 50px;
+    left: 0;
+    right: 0;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+#testground>.pad .switchbutton {
+    background-color: #bff;
+    padding: 3px 15px;
+    border: 1px solid black;
+    display: inline-block;
+    right: 0;
+    float: right;
+    border-radius: 8px;
+    margin: 10px 0;
+    box-shadow: 0px 0px 2px 0px rgb(0, 0, 0);
+    text-shadow: 1px 1px 2px white;
+    cursor: pointer;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+#testground>.pad .switchbutton:hover {
+    box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
+}
+
+#testground>.pad .JSConsole>.output {
+    height: 70%;
+}
+
+#testground>.pad .JSCodePad {
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+}
+
+
+
+
+#testground>.pad .JSConsole,
+#testground>.pad .JSCodePad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    bottom: 20px;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: 32px;
+}
+
+#testground>.pad .JSConsole .output {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0;
+    top: 0;
+    bottom: 42px;
+    height: auto;
+    width: auto;
+}
+
+#testground>.pad .JSConsole input {
+
+    position: absolute;
+    display: block;
+    height: 28px;
+    /* left: 0; */
+    /* right: 0; */
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
