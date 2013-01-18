@@ -1674,6 +1674,87 @@ if ( a == false) {
           </div>
           </section>
 
+          <section>
+          <h3>Common patterns: Immediate Function</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Immediate Function is common used to prevent Global Object pollution.</code>
+            </ul>
+          </div>
+          <div class="JSCodePad" style=" height:400px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+(function(){
+  "use strict";
+
+  // the name foo will not be added to Global Object
+  var foo;
+
+  // the name bar will not be added to Global Object
+  function bar(){
+    console.log(arguments.length);
+  }
+  bar(1,2,3);
+
+})();
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Common patterns: Private variables</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Private variable and methods can be hided by closure.</code>
+            </ul>
+          </div>
+          <div class="JSCodePad" style=" height:400px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+function classFoo(){
+  // private bar will not be accesible directly
+  //   by user.
+  var bar;
+  this.getBar = function(){
+    return bar;
+  };
+  this.setBar = function( newBar ) {
+    bar = newBar;
+  };
+}
+
+var b = new classFoo();
+b.setBar(100);
+console.log( b.getBar() );
+
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+          </section>
+
+          <section>
+          <h3>Common patterns: Options argument</h3>
+          <div style="text-align:left; font-size:0.7em;line-height: normal;">
+            <ul>
+              <li> Data object is common used for named options of function.</code>
+            </ul>
+          </div>
+          <div class="JSCodePad" style=" height:400px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+function foo( options ) {
+  options.type = options.type || "a human";
+  console.log( "My name is " + 
+    options.name + ", I'm " +
+    options.type );
+}
+foo( { name: "Tom", type: "a boy" });
+foo( { name: "Jerry" });
+            </xmp>
+            <div class="output" editable="true" > </div>
+            <div class="run" >run</div>
+          </div>
+          </section>
 
 				</section>
 
