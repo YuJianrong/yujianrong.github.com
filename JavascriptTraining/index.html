@@ -138,7 +138,8 @@ function strictFunc(){
           </p>
           <div class="JSCodePad" style=" height:250px;">
             <xmp class="code" style="text-align:left; line-height:normal;">
-// And you can use console object in the Code Pad to print information:
+// And you can use console object in the Code Pad to 
+// print some information:
 
 console.log("Hello, it's normal text");
 
@@ -192,7 +193,7 @@ console.error("Hello, it's error text");
             </div>
             <div class="JSConsole">
               <div class="output" style="height: 200px;" editable="true"> </div>
-              <input type="text"></input>
+              <input type="text" value="077"></input>
             </div>
 
           </section>
@@ -202,15 +203,23 @@ console.error("Hello, it's error text");
             <div style="text-align:left; font-size:0.6em;line-height: normal;">
               <li>Single quotes or double quotes</li>
               <code>'string', "string", '"double quotes in single quotes"', "'same for single'"</code>
-              <li>Unicode ucs-2 encoding used internal(two characters for unicode supplementary planes)</li>
+              <li>Unicode UTF-16 encoding used internal(two characters for unicode supplementary planes)</li>
               <code> '你好', '𠀰𠀱𠀲𠀳𠀴' </code>
               <li>Control characters</li>
               <code>\uHHHH (unicode, BMP only), \b (backspace), \f (formfeed), \n (newline), \r (carriage return), \t (tab), \' , \"</code>
             </div>
-            <div class="JSConsole">
-              <div class="output" style="height: 200px;" editable="true"> </div>
-              <input type="text"></input>
-            </div>
+
+          <div class="JSCodePad" style=" height:200px;">
+            <xmp class="code" style="text-align:left; line-height:normal;">
+console.log("Hello".length);
+console.log("你好".length);
+console.log("𠀰𠀱𠀲𠀳𠀴".length); 
+  // 5 characters but length is 10
+            </xmp>
+            <div class="output" editable="true"> </div>
+            <div class="run">run</div>
+          </div>
+
           </section>
 
 
@@ -227,9 +236,9 @@ console.error("Hello, it's error text");
           <h3>Explicit Type Conversion</h3>
 
           <ul>
-            <li><i>Boolean()</i> 
-            <li><i>String()</i>
-            <li><i>Number()</i>
+            <li><code>Boolean()</code> 
+            <li><code>String()</code>
+            <li><code>Number()</code>
           </ul>
           <br/>
           And other ways:
@@ -314,10 +323,10 @@ console.log(
           <h3>Object Type Operators</h3>
           <div style="text-align:left">
             <ul>
-              <li>in
-              <li>delete
-              <li>instanceof
-              <li>for (in ...) loop <span  class="warning">(unordered)</span>
+              <li><code>in</code>
+              <li><code>delete</code>
+              <li><code>instanceof</code>
+              <li><code>for (in ...)</code> loop <span  class="warning">(unordered)</span>
             </ul>
           </div>
           <div class="JSCodePad" style=" height:300px;">
@@ -392,8 +401,8 @@ console.log( objA.value );
           <div style="text-align:left">
           <p>There is always a global object in ECMAScript environment. </p>
           <ul style="text-align:left">
-            <li><i>window</i> in browser
-            <li><i>global</i> in nodejs
+            <li><code>window</code> in web browser
+            <li><code>global</code> in nodejs
           </ul>
 
           </div>
@@ -481,7 +490,7 @@ console.log( $Hello + 世界.なまえ );
           </div>
           </section>
 
-          <section>
+          <section data-state="warningState">
           <h3>Words in Global Object</h3>
 
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
@@ -535,12 +544,15 @@ console.log( $Hello + 世界.なまえ );
             </div>
           <div class="JSCodePad" style=" height:200px;">
             <xmp class="code" style="text-align:left; line-height:normal;">
+// == and != should not be used in most cases
 console.log( 5 == "5" );
 console.log( 0 == "" );
 console.log( 0 == {} );
 console.log( 0 == [] );
 console.log( undefined == null );
 console.log( undefined == 0 );
+
+// result will be false if operator ==== is used
             </xmp>
             <div class="output" editable="true"> </div>
             <div class="run">run</div>
@@ -953,12 +965,12 @@ function foo(a1) {
   //closure is created when function created 
   function bar(a2){
     var p3 = 100;
-    console.log( p1 );
-    console.log( p2 );
-    console.log( p3 );
+    console.log( p1 ); // global scope
+    console.log( p2 ); // parent function scope
+    console.log( p3 ); // function scope
 
-    console.log( a1 );
-    console.log( a2 );
+    console.log( a1 ); // parent function scope
+    console.log( a2 ); // function scope       
     }
   return bar;
 }
@@ -971,11 +983,9 @@ _bar(7);
 for (var i=0; i<5; ++i) {
   setTimeout( function(){
     console.log(i);
-  },0); 
-//  console.log(100*i+50);
+  },200*i+500); 
 }
-
-//console.log(65536);
+console.log("timer start");
 //*/
             </xmp>
             <div class="output" editable="true"> </div>
@@ -1113,7 +1123,9 @@ bar2.print();
 console.log(bar2.classMember);
 console.log(bar2.instanceMember);
 
-/* Create a new object manualy (not avaliable on IE)
+/* Create a new object manualy (not avaliable on IE, the */
+/* interal [[prototype]] variable is not public in IE ) */
+/*
 var bar3 = {};
 bar3.__proto__ = classFoo.prototype;
 classFoo.call(bar3, "objBar3")
@@ -1322,8 +1334,6 @@ var a4 = new Array();
           <h3><span style="text-transform:none">Array</span> Objects</h3>
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
             Portotype variables and methods
-            <li>Variables</li>
-            <code>length</code>
             <li>Methods will generate a new Array</li>
             <code>concat slice</code>
             <li>Methods will modify the Array itself</li>
@@ -1332,6 +1342,10 @@ var a4 = new Array();
             <code>toString join</code>
             <li>New methods in ECMA5 (implemented in es5-polyfill)</li>
             <code>indexOf lastIndexof every some forEach map filter <span style="color:darkred">reduce reduceRight</span></code>
+            <br/>
+            <br/>
+            Instance variables
+            <li> <code>length</code>
           </div>
           </section>
 
@@ -1433,7 +1447,8 @@ console.log( String.fromCharCode( 0x597d ) );
             <code> charAt concat replace slice(start, end) substring(start, end) toLowerCase toUpperCase <span style="color:darkred">trim()</span> <s>substr</s></code>
             <li>Return other value</li>
             <code>indexOf lastIndexOf search(regexp) match(regexp) localeCompare charCodeAt<span style="color:darkred">([])</span> split(seperator)  </code><br/>
-            Portotype variables: <br/>
+            <br/>
+            Instance variables: <br/>
             <code> length </code>
           </div>
           </section>
@@ -1476,11 +1491,12 @@ console.log( String.fromCharCode( 0x597d ) );
           <h3><span style="text-transform:none">Function</span> Objects</h3>
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
             Portotype methods and variable properties:
-            <li><code>length</code></li>
             <li><code>toString</code></li>
             <li><code>apply</code></li>
             <li><code>call</code></li>
             <li><code>bind</code> <span style="color: darkred;">(ECMA5, implemented in es5-polyfill)</span></li>
+            Instance variables:
+            <li><code>length</code></li>
           </div>
           <div class="JSCodePad" style=" height:250px;">
             <xmp class="code" style="text-align:left; line-height:normal;">
@@ -1706,7 +1722,7 @@ if ( a == false) {
           <h3>Common patterns: Private variables</h3>
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
             <ul>
-              <li> Private variable and methods can be hided by closure.</code>
+              <li> Private variable and methods can be hidden by closure.</code>
             </ul>
           </div>
           <div class="JSCodePad" style=" height:400px;">
@@ -1787,6 +1803,10 @@ foo( { name: "Jerry" });
         <section>
           <h1>THE END</h1>
           <h3>BY Jianrong Yu</h3>
+          <br/>
+          <small>With presentation framework <a href="http://lab.hakim.se/reveal-js">reveal.js</a>.</small>
+          <br/>
+          <small> Fork the trainning on <a href="https://github.com/YuJianrong/yujianrong.github.com/tree/master/JavascriptTraining">GitHub</a>.</small>
         </section>
 
 

@@ -199,8 +199,11 @@
       $$(".closeButton").addEventListener("click", function(e) {
           hideTestGround( true);
       }, false);
-      
-      
+
+      // add placeholder for all the codeconsole
+      [].forEach.call( document.querySelectorAll("div.JSConsole > input"), function(domInput){
+          domInput.setAttribute("placeholder", "Input JavaScript code here");
+      });
 
   }, false);
 
