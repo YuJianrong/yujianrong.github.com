@@ -521,8 +521,8 @@ console.log( $Hello + 世界.なまえ );
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
             <li>Arithmetic operators:</li>
             <code>+ -(subtraction ) * / % </code> <br/>
-            <code>++ -- -(Unary negation)</code>
-            <li>Bitwise operators <span  class="warning">(Note: the number will be converted to 32 bits integer)</span></li>
+            <code>++ -- + -(Unary negation)</code>
+            <li>Bitwise operators <span  class="warning">(Note: the number will be converted to 32 bits integer for any Bitwise operation)</span></li>
             <code>&amp; | ^ ~ &lt;&lt; &gt;&gt; <b>&gt;&gt;&gt;</b> </code>
             <li>Assign operators:</li>
             <code>+= -= *= /= %= &lt;&lt;= &gt;&gt;= &gt;&gt;&gt;= &amp;= ^= |=</code>
@@ -938,7 +938,7 @@ function foo(a,b){
 }
 foo.bar = 200;
 
-console.log( foo.length );
+console.log( foo.length ); // Length of the arguments
 console.log( foo.bar ); 
 console.log( foo.name ); // NOT IN SPECIFICATION
             </xmp>
@@ -978,13 +978,17 @@ function foo(a1) {
 var _bar = foo(5);
 _bar(7);
 
-// fix it
+// Use closure to fix it
 /*
 for (var i=0; i<5; ++i) {
   setTimeout( function(){
     console.log(i);
   },200*i+500); 
-}
+  // setTimeout( function(i){
+  //   return function(){
+  //     console.log(i);
+  //   };
+  // }(i),200*i+500); }
 console.log("timer start");
 //*/
             </xmp>
@@ -1176,7 +1180,7 @@ doraemon.shout();
           <section data-state="warningState">
           <h3>Extension of Native Prototypes</h3>
           <div style="text-align:left; font-size:0.7em;line-height: normal;">
-            Native Object can be extended by modify the prototype of there Native Constructors.<br/>
+            Native Object can be extended by modify the prototype of their Native Constructors.<br/>
             Note: Monkey patching on native object is not recommended, the only exception is backport the features of newer JavaScript specification.</li>
           </div>
           <div class="JSCodePad" style=" height:300px;">
@@ -1461,7 +1465,7 @@ console.log( String.fromCharCode( 0x597d ) );
             Constructor variable properties: </span>
 
             <li><code>MAX_VALUE</code> : 1.7976931348623157*10<sup>308</sup></li>
-            <li><code>MIN_VALUE</code> : 5*10<sup>324</sup></li>
+            <li><code>MIN_VALUE</code> : 5*10<sup>-324</sup></li>
             <li><code>NaN</code></li>
             <li><code>NEGATIVE_INFINITY</code></li>
             <li><code>POSITIVE_INFINITY</code></li>
