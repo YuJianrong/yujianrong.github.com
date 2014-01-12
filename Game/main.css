@@ -1,0 +1,11 @@
+
+div {
+    box-sizing: border-box;
+}
+
+
+.container .image{
+    position: absolute;
+    width:300px;
+    height:300px;
+}
