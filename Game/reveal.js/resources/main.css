@@ -1,0 +1,78 @@
+
+div {
+    box-sizing: border-box;
+}
+
+
+.container .image{
+    position: absolute;
+    width:300px;
+    height:300px;
+}
+
+#title{
+  width: 500px;
+  height: 400px;
+  margin-top: 100px;
+}
+
+.center{
+  position: relative;
+  margin: auto!important;
+}
+
+.ready, .musicPlaying, .paused{
+  margin-top: 100px !important;
+}
+
+.paused{
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%,0);
+  top: 0;
+  font-weight: 900 !important;
+  text-shadow: 0 0 20px rgb(236, 0, 0);
+  color: rgba(255, 255, 255, 1);
+  font-size: 100px !important;
+  font-family: "Quicksand", sans-serif !important;
+  text-transform: uppercase;
+  display: none;
+}
+.paused:after {
+  content: "Paused";
+}
+.paused[data-show="true"]{
+  display: block;
+}
+
+.ready:after{
+  display: block;
+  content: "Ready";
+  -webkit-animation: breath 600ms alternate infinite ;
+}
+
+
+@-webkit-keyframes title 
+{
+  0%   {opacity: 0   ; -webkit-transform:translate(-50%,-50%) scale(0.5) ;  }
+  25%  {opacity: 0.5 ;   }
+  50%  {opacity: 1   ;   }
+  75%  {opacity: 1  ;   }
+  100% {opacity: 0   ; -webkit-transform:translate(-50%,-50%) scale(1);  }
+}
+
+@-webkit-keyframes breath
+{
+  0%   {opacity: 0.1   ;    }
+  100% {opacity: 1   ;   }
+}
+
+#title>.icon{
+  background-image: url(./imgs/whatsapp.png);
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  background-size: cover;
+  -webkit-transform: translate(-50%,-50%) scale(1);
+  -webkit-animation: title 6s infinite;
+}

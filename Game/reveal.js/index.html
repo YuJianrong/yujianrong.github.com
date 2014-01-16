@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
+		<link rel="stylesheet" href="resources/main.css" >
+
 	</head>
 
 	<body>
@@ -23,10 +25,23 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>万万没猜到</h1>
+					<h1>What's App</h1>
 					<p>
-            <img width="400" height="400" src="./resources/imgs/whatsapp.png" style="border:0; box-shadow: 0 0 0 0;">
+            <div id="title" class="center">
+            </div>
 					</p>
+				</section>
+
+				<section data-state="game_warmup" id="WarmUp">
+					<section>
+					<h1>Warm up</h1>
+					<p>
+            <div id="console" class="center" style="height:400px; width: 600px; text-align: center; : ">
+              <h2 class="ready"> </h2>
+              <h2 class="musicPlaying">♬ Music ♬</h2>
+              <span class="paused"></span>
+					</p>
+					</section>
 				</section>
 
 				<section>
@@ -338,6 +353,8 @@ function linkify( selector ) {
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+
+    <script src="resources/main.js"></script>
 
 		<script>
 

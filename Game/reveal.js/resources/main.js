@@ -20,13 +20,17 @@ var setting = {
     jigsaw: {
       interval: 100
     }
+  },
+  WarmUp: {
+    imgs: ["pic1", "pic2"],
+    music: ["m1", "m2"]
   }
 };
 
 var cache = {
   imgs:{},
   music: {}
-}
+};
 
 // preload the resources
 function preloadImages(){
@@ -51,8 +55,8 @@ function getResource(type, name){
   return cache[type][name];
 }
 
-function $(selector){
-  return document.querySelector(selector);
+function $(selector, elm){
+  return (elm || document)["querySelector"](selector);
 }
 
 function createGrid(domElement, size, image){
@@ -94,11 +98,14 @@ Array.prototype.shuffle=function(){
 };
 
 function GameLoopBase(interval){
+  this._paused = true;
   this.pause = function(){
+    this._paused = true;
     clearInterval(this._timer);
   };
   this.resume = function(){
     this.pause();
+    this._paused = false;
     this._timer = setInterval(function(){
         if (!this.step()) {
           this.pause();
@@ -190,23 +197,125 @@ function GameJigsaw(grid){
 }
 
 function GameMusic(audio){
-  this._audio = audio
+  this._audio = audio;
+  this._paused= true;
   this.pause = function(){
+    this._paused = true;
     this._audio.pause();
   };
   this.resume = function(){
+    this._paused = false;
     this._audio.play();
   };
 }
 
+var Key={
+  space: 32,
+  1: 49,
+  2: 50,
+  enter: 13
+};
+
+function gameKeyPressed(ev){
+  switch(ev.keyCode){
+    case Key.space: 
+    gameCenter._game && gameCenter._game.toggle();
+    break;
+    case Key[1]:
+    case Key[2]:
+  }
+
+  if (Object.keys(Key).reduce(function(obj, key){ obj[Key[key]] = true; return obj;},{})[ev.keyCode]!== undefined) {
+    ev.stopPropagation();
+    ev.preventDefault();
+  }
+}
+
+function startTitleAnim(){
+  setInterval(function(){
+      var div = document.createElement("div");
+      div.setAttribute("class", "icon");
+      div.style.left = (Math.random()*100)+"%";
+      div.style.top = (Math.random()*100)+"%";
+      $("#title").insertBefore(div, $("#title").children[0]);
+      setTimeout(function(){
+          $("#title").removeChild(div);
+      },6000);
+  }, 1000);
+}
+
+
+
+var gameCenter={
+  _game : null,
+  enter: function(gameType){
+    if (this._game) {
+      this._game.stop();
+    };
+    this._game = this[gameType];
+    this._game._dom = $("#"+gameType);
+    this._game.reset();
+  },
+  "WarmUp":{
+    _sequence : [],
+    init: function(){
+      // build 100 random images
+      var imgs = [];
+      while (imgs.length < 100){
+        var tmpSet = setting.WarmUp.imgs.shuffle();
+        if (imgs[imgs.length-1] !== tmpSet[0]) {
+          imgs = imgs.concat(tmpSet);
+        }
+      }
+      var music = [];
+      while (music.length < 100){
+        var tmpSet = setting.WarmUp.music.shuffle();
+        if (music[music.length-1] !== tmpSet[0]) {
+          music = music.concat(tmpSet);
+        }
+      }
+      for (var i=0; i<100; ++i) {
+        this._sequence.push({
+            type: "music",
+            file: music[i]
+        });
+        this._sequence.push({
+            type: "image",
+            file: imgs[i]
+        });
+      }
+
+
+    },
+    reset: function(){
+    },
+    toggle: function(){
+      $(".paused", this._dom).setAttribute("data-show", "true")
+      return;
+
+      if (this._instance._paused) {
+        this._instance.resume();
+      } else {
+        this._instance.pause();
+      }
+    }
+  }
+};
+
+gameCenter.WarmUp.init();
 
 
 function main(){
-  var grid = createGrid($(".container .image"), 5, getResource("imgs", "pic1"));
-  // var game1 = new GameOpacity(grid);
-  // var game1 = new GameJigsaw(grid);
-  window.game1 = new GameMusic(getResource("music", "m1"));
-  game1.resume();
+  // var grid = createGrid($(".container .image"), 5, getResource("imgs", "pic1"));
+  // // var game1 = new GameOpacity(grid);
+  // // var game1 = new GameJigsaw(grid);
+  // window.game1 = new GameMusic(getResource("music", "m1"));
+  // game1.resume();
+  startTitleAnim();
+  window.addEventListener("keydown", gameKeyPressed, true);
+  Reveal.addEventListener( 'game_warmup', function() {
+      gameCenter.enter("WarmUp");
+  } );
 }
 
 main();
