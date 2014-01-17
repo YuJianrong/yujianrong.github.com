@@ -15,7 +15,7 @@ var setting = {
   game: {
     opacity: {
       tick : 1000,
-      interval: 1000
+      interval: 600
     },
     jigsaw: {
       interval: 100
@@ -61,6 +61,7 @@ function $(selector, elm){
 
 function createGrid(domElement, size, image){
   var ret = [];
+  domElement.innerHTML = "";
   for (var y=0; y<size; ++y){
     var row = [];
     ret.push(row);
@@ -213,7 +214,8 @@ var Key={
   space: 32,
   1: 49,
   2: 50,
-  enter: 13
+  enter: 13,
+  R: 82
 };
 
 function gameKeyPressed(ev){
@@ -221,6 +223,11 @@ function gameKeyPressed(ev){
     case Key.space: 
     gameCenter._game && gameCenter._game.toggle();
     break;
+    case Key.R:
+    gameCenter._game && gameCenter._game.reset();
+    break;
+    case Key.enter:
+    gameCenter._game && gameCenter._game.showAnswer();
     case Key[1]:
     case Key[2]:
   }
@@ -244,6 +251,53 @@ function startTitleAnim(){
   }, 1000);
 }
 
+function SingleGame(init){
+    this._sequence = [];
+    this.reset= function(){
+      var option = this._sequence.shift();
+      if (!option) {
+        return;
+      }
+      this._instance && this._instance.pause();
+
+      $(".ready", this._dom).setAttribute("data-show", "true");
+      $(".musicPlaying", this._dom).setAttribute("data-show", "false");
+      $(".container", this._dom).setAttribute("data-show", "false");
+      $(".paused", this._dom).setAttribute("data-show", "false");
+      $(".answer .app", this._dom).innerHTML = option.file;
+      $(".answer .app", this._dom).setAttribute("data-show", "false");
+
+      if (option.type === "music") {
+        this._instance = new GameMusic(getResource("music", option.file));
+      } else {
+        this._instance = new GameOpacity(
+          createGrid($(".container .image", this._dom), 5, getResource("imgs", option.file))
+        );
+      }
+    };
+    this.showAnswer = function(){
+      $(".answer .app", this._dom).setAttribute("data-show", "true");
+    };
+    this.stop = function(){
+      this._instance && this._instance.pause();
+    };
+    this.toggle = function(){
+      if (this._instance._paused) {
+        $(".paused", this._dom).setAttribute("data-show", "false")
+        $(".ready", this._dom).setAttribute("data-show", "false")
+        if (this._instance instanceof GameOpacity) {
+          $(".container", this._dom).setAttribute("data-show", "true");
+        } else {
+          $(".musicPlaying", this._dom).setAttribute("data-show", "true");
+        }
+        this._instance.resume();
+      } else {
+        $(".paused", this._dom).setAttribute("data-show", "true")
+        this._instance.pause();
+      }
+    };
+    init.call(this);
+}
 
 
 var gameCenter={
@@ -256,53 +310,45 @@ var gameCenter={
     this._game._dom = $("#"+gameType);
     this._game.reset();
   },
-  "WarmUp":{
-    _sequence : [],
-    init: function(){
+  "WarmUp": new SingleGame(function(){
       // build 100 random images
-      var imgs = [];
-      while (imgs.length < 100){
-        var tmpSet = setting.WarmUp.imgs.shuffle();
-        if (imgs[imgs.length-1] !== tmpSet[0]) {
-          imgs = imgs.concat(tmpSet);
-        }
-      }
-      var music = [];
-      while (music.length < 100){
-        var tmpSet = setting.WarmUp.music.shuffle();
-        if (music[music.length-1] !== tmpSet[0]) {
-          music = music.concat(tmpSet);
-        }
-      }
-      for (var i=0; i<100; ++i) {
-        this._sequence.push({
-            type: "music",
-            file: music[i]
-        });
-        this._sequence.push({
-            type: "image",
-            file: imgs[i]
-        });
-      }
-
-
-    },
-    reset: function(){
-    },
-    toggle: function(){
-      $(".paused", this._dom).setAttribute("data-show", "true")
-      return;
-
-      if (this._instance._paused) {
-        this._instance.resume();
-      } else {
-        this._instance.pause();
-      }
-    }
-  }
+      // var imgs = [];
+      // while (imgs.length < 100){
+      //   var tmpSet = setting.WarmUp.imgs.shuffle();
+      //   if (imgs[imgs.length-1] !== tmpSet[0]) {
+      //     imgs = imgs.concat(tmpSet);
+      //   }
+      // }
+      // var music = [];
+      // while (music.length < 100){
+      //   var tmpSet = setting.WarmUp.music.shuffle();
+      //   if (music[music.length-1] !== tmpSet[0]) {
+      //     music = music.concat(tmpSet);
+      //   }
+      // }
+      // for (var i=0; i<100; ++i) {
+      //   this._sequence.push({
+      //       type: "music",
+      //       file: music[i]
+      //   });
+      //   this._sequence.push({
+      //       type: "image",
+      //       file: imgs[i]
+      //   });
+      // }
+      this._sequence= [
+        { type:"music", file: "m1"},
+        { type:"music", file: "m1"}
+      ];
+  }),
+  "Stage1": new SingleGame(function(){
+      this._sequence=[
+        { type:"image", file: "pic1"},
+        { type:"image", file: "pic2"}
+      ];
+  })
 };
 
-gameCenter.WarmUp.init();
 
 
 function main(){
@@ -313,8 +359,11 @@ function main(){
   // game1.resume();
   startTitleAnim();
   window.addEventListener("keydown", gameKeyPressed, true);
-  Reveal.addEventListener( 'game_warmup', function() {
+  Reveal.addEventListener('game_warmup', function() {
       gameCenter.enter("WarmUp");
+  } );
+  Reveal.addEventListener('game_stage1', function() {
+      gameCenter.enter("Stage1");
   } );
 }
 
