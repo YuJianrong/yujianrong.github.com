@@ -18,10 +18,63 @@ div {
     height:100%;
 }
 
+.containerM {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%,0);
+  width: 1000px;
+  height: 500px;
+  text-align: center;
+}
+
+.containerM > img {
+  display: inline-block;
+  height: 230px;
+  width: 230px;
+  margin: 20px !important;
+  border: 0 !important;
+
+}
+
+.timer{
+  position: absolute;
+  top: 260px;
+  left: 50%;
+  -webkit-transform: translate(-50%,0);
+  width: 300px;
+  height: 100px;
+  display: inline-block;
+}
+
 #title{
   width: 500px;
   height: 400px;
   margin-top: 100px;
+}
+
+#GreenScore, #RedScore {
+  position: fixed;
+  width: 50px;
+  bottom: 0;
+  border: 1px solid black;
+  z-index: 1000;
+
+  text-align: center;
+  color: #FFF;
+  font-family: arial;
+  padding: 10px;
+  font-size: 25px;
+}
+
+#GreenScore {
+  background-color: green;
+  left: 0;
+}
+
+#RedScore{
+  background-color: red;
+  right: 0;
 }
 
 .center{

@@ -5,8 +5,46 @@ var setting = {
     music: "./resources/music"
   },
   imgs: {
-    pic1: "1.jpg",
-    pic2: "2.jpg"
+    "Any.do" : "Any.do.webp",
+    "SAP Anywhere" : "Anywhere.webp",
+    "SAP B1" : "B1.webp",
+    "百度云" : "Baidu yun.webp",
+    "SAP ByDesign" : "ByDesign.webp",
+    "Camera+" : "Camera+.png",
+    "Clear" : "Clear.png",
+    "Facebook-messenger" : "Facebook-messenger.webp",
+    "Flipboard" : "Flipboard.webp",
+    "Foursquare" : "Foursquare.webp",
+    "Google drive" : "Google drive.webp",
+    "iCloud" : "iCloud.png",
+    "Instagram" : "Instagram.webp",
+    "Instapaper" : "Instapaper.webp",
+    "iPhone camera" : "iPhone camera.jpg",
+    "来往" : "laiwang.webp",
+    "Moves" : "Moves.webp",
+    "Nike run+" : "Nike run.png",
+    "Pandora" : "Pandora.webp",
+    "Path" : "Path.webp",
+    "Pinterest" : "Pinterest.webp",
+    "Pocket" : "Pocket.webp",
+    "Press" : "Press.webp",
+    "Quickoffice" : "Quickoffice.webp",
+    "SAP leave request" : "SAP leave request.webp",
+    "Skydrive" : "Skydrive.webp",
+    "Snapchat" : "Snapchat.webp",
+    "Tesla" : "Tesla.webp",
+    "Tumblr" : "Tumblr.webp",
+    "Tweetbot" : "Tweetbot.png",
+    "Twitter(old)" : "Twitter old.jpg",
+    "Twitter" : "Twitter.webp",
+    "Viber" : "Viber.webp",
+    "Vimeo" : "Vimeo.png",
+    "Vine" : "Vine.webp",
+    "微信" : "Wechat.webp",
+    "whatsapp" : "whatsapp.webp",
+    "迅雷" : "Xunlei.webp",
+    "易信" : "yixin.webp",
+    "Youtube" : "Youtube.webp"
   },
   music: {
     m1: "1.mp3",
@@ -210,13 +248,60 @@ function GameMusic(audio){
   };
 }
 
+function GameTimer(domTimer){
+  this._tick = 300;
+  this._paused = true;
+  this._intervalId = 0;
+  this.pause = function(){
+    this._paused = true;
+    clearInterval(this._intervalId);
+    this._intervalId = 0;
+  };
+  this.resume = function(){
+    this.pause();
+    this._paused = false;
+    this._intervalId = setInterval(function(){
+        this._tick -= 1;
+        if (this._tick <=0) {
+          this._tick =0;
+        };
+        domTimer.innerHTML = (this._tick/10).toFixed(1);
+    }.bind(this), 100)
+  }
+  domTimer.innerHTML = (this._tick/10).toFixed(1);
+}
+
 var Key={
   space: 32,
   1: 49,
   2: 50,
   enter: 13,
-  R: 82
+  R: 82,
+  C: 67
 };
+
+function scoreReset(){
+  localStorage.setItem("GreenScore", 0);
+  localStorage.setItem("RedScore", 0);
+  updateScore();
+};
+
+if (localStorage.getItem("GreenScore") === null){
+  scoreReset();
+}
+updateScore();
+
+function updateScore(){
+  $("#GreenScore").innerHTML = localStorage.getItem("GreenScore");
+  $("#RedScore").innerHTML = localStorage.getItem("RedScore");
+
+  var scoreGrid = 40;
+
+  $("#GreenScore").style.height = localStorage.getItem("GreenScore") * scoreGrid + "px";
+  $("#RedScore").style.height = localStorage.getItem("RedScore") * scoreGrid + "px";
+  $("#GreenScore").style.lineHeight = localStorage.getItem("GreenScore") * scoreGrid + "px";
+  $("#RedScore").style.lineHeight = localStorage.getItem("RedScore") * scoreGrid + "px";
+}
 
 function gameKeyPressed(ev){
   switch(ev.keyCode){
@@ -228,8 +313,19 @@ function gameKeyPressed(ev){
     break;
     case Key.enter:
     gameCenter._game && gameCenter._game.showAnswer();
+    break;
     case Key[1]:
+    localStorage.setItem("GreenScore", (localStorage.getItem("GreenScore")|0) +1);
+    updateScore();
+    break;
     case Key[2]:
+    localStorage.setItem("RedScore", (localStorage.getItem("RedScore")|0) +1);
+    updateScore();
+    break;
+    case Key.C:
+    scoreReset();
+    location.reload();
+    break;
   }
 
   if (Object.keys(Key).reduce(function(obj, key){ obj[Key[key]] = true; return obj;},{})[ev.keyCode]!== undefined) {
@@ -299,6 +395,45 @@ function SingleGame(init){
     init.call(this);
 }
 
+function MultiGame(init){
+  this.reset= function(){
+    this._instance = new GameTimer($(".timer", this._dom));
+
+      $(".ready", this._dom).setAttribute("data-show", "true");
+      $(".containerM", this._dom).setAttribute("data-show", "false");
+      $(".containerM", this._dom).innerHTML = "";
+      $(".timer", this._dom).setAttribute("data-show", "false");
+      $(".answer .apps", this._dom).setAttribute("data-show", "false");
+      $(".answer .apps", this._dom).innerHTML = "";
+
+      this._sequence.forEach(function(file){
+          var img = document.createElement("img");
+          $(".containerM", this._dom).appendChild(getResource("imgs", file));
+
+          var h2 = document.createElement("h2");
+          h2.innerHTML = file;
+          $(".answer .apps", this._dom).appendChild(h2);
+
+
+      }.bind(this));
+
+    };
+    this.showAnswer = function(){
+      $(".answer .apps", this._dom).setAttribute("data-show", "true");
+    };
+    this.stop = function(){
+    };
+    this.toggle = function(){
+      if (this._instance._paused) {
+        $(".ready", this._dom).setAttribute("data-show", "false")
+        $(".containerM", this._dom).setAttribute("data-show", "true");
+      $(".timer", this._dom).setAttribute("data-show", "true");
+        this._instance.resume();
+      } 
+    };
+    init.call(this);
+}
+
 
 var gameCenter={
   _game : null,
@@ -307,7 +442,7 @@ var gameCenter={
       this._game.stop();
     };
     this._game = this[gameType];
-    this._game._dom = $("#"+gameType);
+    this._game._dom = $("[data-state='"+gameType+"']");
     this._game.reset();
   },
   "WarmUp": new SingleGame(function(){
@@ -343,10 +478,109 @@ var gameCenter={
   }),
   "Stage1": new SingleGame(function(){
       this._sequence=[
-        { type:"image", file: "pic1"},
-        { type:"image", file: "pic2"}
+        { type:"image", file: "Pocket" },
+        { type:"image", file: "Snapchat" },
+        { type:"image", file: "Flipboard"},
+        { type:"image", file: "Moves"},
+        { type:"image", file: "Instapaper"},
+        { type:"image", file: "Pandora"},
+        { type:"image", file: "Youtube"},
+        { type:"image", file: "Tweetbot"},
+        { type:"image", file: "Foursquare"}
+      ];
+  }),
+
+  "Stage2_Green": new MultiGame(function(){
+      this._sequence=[
+        "iPhone camera" ,
+        "Instagram" ,
+        "Camera+" 
+      ];
+  }),
+
+  "Stage2_Red": new MultiGame(function(){
+      this._sequence=[
+        "百度云" ,
+        "Skydrive" ,
+        "iCloud" 
+      ];
+  }),
+
+
+  "Stage3_Green": new MultiGame(function(){
+      this._sequence=[
+        "SAP ByDesign" ,
+        "SAP B1" ,
+        "SAP leave request" 
+      ];
+  }),
+
+  "Stage3_Red": new MultiGame(function(){
+      this._sequence=[
+        "SAP Anywhere" ,
+        "Twitter" ,
+        "迅雷" 
+      ];
+  }),
+
+  "Stage4_Green": new MultiGame(function(){
+      this._sequence=[
+        "Any.do" ,
+        "Nike run+" ,
+        "Clear" 
+      ];
+  }),
+
+
+  "Stage4_Red": new MultiGame(function(){
+      this._sequence=[
+        "Path" ,
+        "Pinterest" ,
+        "Press" 
+      ];
+  }),
+
+
+  "Stage5_Green": new MultiGame(function(){
+      this._sequence=[
+        "微信" ,
+        "来往" ,
+        "易信" 
+      ];
+  }),
+
+  "Stage5_Red": new MultiGame(function(){
+      this._sequence=[
+        "Twitter(old)" ,
+        "Tumblr" ,
+        "Tesla" 
+      ];
+  }),
+
+
+  "Stage6_Green": new MultiGame(function(){
+      this._sequence=[
+        "Vimeo" ,
+        "Vine" 
+      ];
+  }),
+
+  "Stage6_Red": new MultiGame(function(){
+      this._sequence=[
+        "Quickoffice" ,
+        "Google drive" 
       ];
   })
+
+  // "Stage7_Green": new MultiGame(function(){
+  //     this._sequence=[
+  //       "Facebook-messenger" ,
+  //       "Viber" ,
+  //       "whatsapp" 
+  //     ];
+  // }),
+
+
 };
 
 
@@ -359,12 +593,18 @@ function main(){
   // game1.resume();
   startTitleAnim();
   window.addEventListener("keydown", gameKeyPressed, true);
-  Reveal.addEventListener('game_warmup', function() {
-      gameCenter.enter("WarmUp");
-  } );
-  Reveal.addEventListener('game_stage1', function() {
-      gameCenter.enter("Stage1");
-  } );
+  Reveal.addEventListener('WarmUp', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage1', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage2_Green', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage2_Red', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage3_Green', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage3_Red', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage4_Green', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage4_Red', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage5_Green', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage5_Red', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage6_Green', function(ev) { gameCenter.enter(ev.type); } );
+  Reveal.addEventListener('Stage6_Red', function(ev) { gameCenter.enter(ev.type); } );
 }
 
 main();
