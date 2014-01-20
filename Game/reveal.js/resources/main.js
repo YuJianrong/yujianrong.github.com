@@ -288,8 +288,14 @@ function scoreReset(){
 
 if (localStorage.getItem("GreenScore") === null){
   scoreReset();
+  $("#GreenScore").setAttribute("data-show", "false");
+  $("#RedScore").setAttribute("data-show", "false");
+  $("#RedScore").innerHTML = localStorage.getItem("RedScore");
 }
 updateScore();
+
+$("#GreenScore").setAttribute("data-show", "false");
+$("#RedScore").setAttribute("data-show", "false");
 
 function updateScore(){
   $("#GreenScore").innerHTML = localStorage.getItem("GreenScore");
@@ -315,11 +321,11 @@ function gameKeyPressed(ev){
     gameCenter._game && gameCenter._game.showAnswer();
     break;
     case Key[1]:
-    localStorage.setItem("GreenScore", (localStorage.getItem("GreenScore")|0) +1);
+    localStorage.setItem("GreenScore", (localStorage.getItem("GreenScore")|0) + (ev.shiftKey ? -1 : 1));
     updateScore();
     break;
     case Key[2]:
-    localStorage.setItem("RedScore", (localStorage.getItem("RedScore")|0) +1);
+    localStorage.setItem("RedScore", (localStorage.getItem("RedScore")|0) +(ev.shiftKey ? -1 : 1));
     updateScore();
     break;
     case Key.C:
@@ -347,9 +353,12 @@ function startTitleAnim(){
   }, 1000);
 }
 
-function SingleGame(init){
+function SingleGame(init, showScore){
     this._sequence = [];
     this.reset= function(){
+      $("#GreenScore").setAttribute("data-show", showScore);
+      $("#RedScore").setAttribute("data-show", showScore);
+
       var option = this._sequence.shift();
       if (!option) {
         return;
@@ -370,6 +379,7 @@ function SingleGame(init){
           createGrid($(".container .image", this._dom), 5, getResource("imgs", option.file))
         );
       }
+
     };
     this.showAnswer = function(){
       $(".answer .app", this._dom).setAttribute("data-show", "true");
@@ -397,41 +407,44 @@ function SingleGame(init){
 
 function MultiGame(init){
   this.reset= function(){
+    $("#GreenScore").setAttribute("data-show", "true");
+    $("#RedScore").setAttribute("data-show", "true");
+
     this._instance = new GameTimer($(".timer", this._dom));
 
-      $(".ready", this._dom).setAttribute("data-show", "true");
-      $(".containerM", this._dom).setAttribute("data-show", "false");
-      $(".containerM", this._dom).innerHTML = "";
-      $(".timer", this._dom).setAttribute("data-show", "false");
-      $(".answer .apps", this._dom).setAttribute("data-show", "false");
-      $(".answer .apps", this._dom).innerHTML = "";
+    $(".ready", this._dom).setAttribute("data-show", "true");
+    $(".containerM", this._dom).setAttribute("data-show", "false");
+    $(".containerM", this._dom).innerHTML = "";
+    $(".timer", this._dom).setAttribute("data-show", "false");
+    $(".answer .apps", this._dom).setAttribute("data-show", "false");
+    $(".answer .apps", this._dom).innerHTML = "";
 
-      this._sequence.forEach(function(file){
-          var img = document.createElement("img");
-          $(".containerM", this._dom).appendChild(getResource("imgs", file));
+    this._sequence.forEach(function(file){
+        var img = document.createElement("img");
+        $(".containerM", this._dom).appendChild(getResource("imgs", file));
 
-          var h2 = document.createElement("h2");
-          h2.innerHTML = file;
-          $(".answer .apps", this._dom).appendChild(h2);
+        var h2 = document.createElement("h2");
+        h2.innerHTML = file;
+        $(".answer .apps", this._dom).appendChild(h2);
 
 
-      }.bind(this));
+    }.bind(this));
 
-    };
-    this.showAnswer = function(){
-      $(".answer .apps", this._dom).setAttribute("data-show", "true");
-    };
-    this.stop = function(){
-    };
-    this.toggle = function(){
-      if (this._instance._paused) {
-        $(".ready", this._dom).setAttribute("data-show", "false")
-        $(".containerM", this._dom).setAttribute("data-show", "true");
+  };
+  this.showAnswer = function(){
+    $(".answer .apps", this._dom).setAttribute("data-show", "true");
+  };
+  this.stop = function(){
+  };
+  this.toggle = function(){
+    if (this._instance._paused) {
+      $(".ready", this._dom).setAttribute("data-show", "false")
+      $(".containerM", this._dom).setAttribute("data-show", "true");
       $(".timer", this._dom).setAttribute("data-show", "true");
-        this._instance.resume();
-      } 
-    };
-    init.call(this);
+      this._instance.resume();
+    } 
+  };
+  init.call(this);
 }
 
 
@@ -475,7 +488,7 @@ var gameCenter={
         { type:"music", file: "m1"},
         { type:"music", file: "m1"}
       ];
-  }),
+  }, false),
   "Stage1": new SingleGame(function(){
       this._sequence=[
         { type:"image", file: "Pocket" },
@@ -488,7 +501,7 @@ var gameCenter={
         { type:"image", file: "Tweetbot"},
         { type:"image", file: "Foursquare"}
       ];
-  }),
+  }, true),
 
   "Stage2_Green": new MultiGame(function(){
       this._sequence=[

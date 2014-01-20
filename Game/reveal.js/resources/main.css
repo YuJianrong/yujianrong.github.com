@@ -65,6 +65,7 @@ div {
   font-family: arial;
   padding: 10px;
   font-size: 25px;
+  -webkit-transition: all 500ms;
 }
 
 #GreenScore {
