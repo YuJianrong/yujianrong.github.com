@@ -44,11 +44,14 @@ var setting = {
     "whatsapp" : "whatsapp.webp",
     "迅雷" : "Xunlei.webp",
     "易信" : "yixin.webp",
-    "Youtube" : "Youtube.webp"
+    "Youtube" : "Youtube.webp",
+    "Dropbox" : "Dropbox.webp",
+    "Quora" : "Quora.webp"
   },
   music: {
-    m1: "1.mp3",
-    m2: "2.mp3"
+    "Angry Birds": "AngryBirds.mp3",
+    "保卫萝卜": "CarrotProtect.mp3",
+    "植物大战僵尸": "PvZ.mp3"
   },
   game: {
     opacity: {
@@ -58,11 +61,11 @@ var setting = {
     jigsaw: {
       interval: 100
     }
-  },
-  WarmUp: {
-    imgs: ["pic1", "pic2"],
-    music: ["m1", "m2"]
   }
+  // WarmUp: {
+  //   imgs: ["pic1", "pic2"],
+  //   music: ["m1", "m2"]
+  // }
 };
 
 var cache = {
@@ -277,7 +280,8 @@ var Key={
   2: 50,
   enter: 13,
   R: 82,
-  C: 67
+  C: 67,
+  G: 71
 };
 
 function scoreReset(){
@@ -332,6 +336,13 @@ function gameKeyPressed(ev){
     scoreReset();
     location.reload();
     break;
+    case Key.G:
+    if (ev.shiftKey) {
+      getResource("music", "植物大战僵尸").pause();
+    } else {
+      getResource("music", "植物大战僵尸").play();
+    }
+    break;
   }
 
   if (Object.keys(Key).reduce(function(obj, key){ obj[Key[key]] = true; return obj;},{})[ev.keyCode]!== undefined) {
@@ -363,7 +374,7 @@ function SingleGame(init, showScore){
       if (!option) {
         return;
       }
-      this._instance && this._instance.pause();
+      this.stop();
 
       $(".ready", this._dom).setAttribute("data-show", "true");
       $(".musicPlaying", this._dom).setAttribute("data-show", "false");
@@ -376,7 +387,7 @@ function SingleGame(init, showScore){
         this._instance = new GameMusic(getResource("music", option.file));
       } else {
         this._instance = new GameOpacity(
-          createGrid($(".container .image", this._dom), 5, getResource("imgs", option.file))
+          createGrid($(".container .image", this._dom), 4, getResource("imgs", option.file))
         );
       }
 
@@ -410,6 +421,7 @@ function MultiGame(init){
     $("#GreenScore").setAttribute("data-show", "true");
     $("#RedScore").setAttribute("data-show", "true");
 
+    this.stop();
     this._instance = new GameTimer($(".timer", this._dom));
 
     $(".ready", this._dom).setAttribute("data-show", "true");
@@ -420,11 +432,13 @@ function MultiGame(init){
     $(".answer .apps", this._dom).innerHTML = "";
 
     this._sequence.forEach(function(file){
-        var img = document.createElement("img");
         $(".containerM", this._dom).appendChild(getResource("imgs", file));
 
         var h2 = document.createElement("h2");
-        h2.innerHTML = file;
+        var img = document.createElement("img");
+        img.src = getResource("imgs", file).src;
+        h2.appendChild(img);
+        h2.appendChild(document.createTextNode(file));
         $(".answer .apps", this._dom).appendChild(h2);
 
 
@@ -435,6 +449,7 @@ function MultiGame(init){
     $(".answer .apps", this._dom).setAttribute("data-show", "true");
   };
   this.stop = function(){
+      this._instance && this._instance.pause();
   };
   this.toggle = function(){
     if (this._instance._paused) {
@@ -485,37 +500,40 @@ var gameCenter={
       //   });
       // }
       this._sequence= [
-        { type:"music", file: "m1"},
-        { type:"music", file: "m1"}
+        { type:"music", file: "保卫萝卜"},
+        { type:"music", file: "Angry Birds"}
       ];
   }, false),
   "Stage1": new SingleGame(function(){
       this._sequence=[
-        { type:"image", file: "Pocket" },
-        { type:"image", file: "Snapchat" },
         { type:"image", file: "Flipboard"},
-        { type:"image", file: "Moves"},
         { type:"image", file: "Instapaper"},
-        { type:"image", file: "Pandora"},
+        { type:"image", file: "Foursquare"},
+        // { type:"image", file: "Instagram"},
+        { type:"image", file: "Dropbox"},
         { type:"image", file: "Youtube"},
-        { type:"image", file: "Tweetbot"},
-        { type:"image", file: "Foursquare"}
+        { type:"image", file: "Quora"},
+        // { type:"image", file: "Pocket" },
+        // { type:"image", file: "Snapchat" },
+        // { type:"image", file: "Moves"},
+        // { type:"image", file: "Pandora"},
+        // { type:"image", file: "Tweetbot"},
       ];
   }, true),
 
   "Stage2_Green": new MultiGame(function(){
       this._sequence=[
-        "iPhone camera" ,
-        "Instagram" ,
-        "Camera+" 
+        "Path" ,
+        "Pinterest" ,
+        "Press" 
       ];
   }),
 
   "Stage2_Red": new MultiGame(function(){
       this._sequence=[
-        "百度云" ,
-        "Skydrive" ,
-        "iCloud" 
+        "iPhone camera",
+        "Instagram" ,
+        "Camera+"
       ];
   }),
 
@@ -536,7 +554,17 @@ var gameCenter={
       ];
   }),
 
+
   "Stage4_Green": new MultiGame(function(){
+      this._sequence=[
+        "Twitter(old)" ,
+        "Tumblr" ,
+        "Tesla" 
+      ];
+  }),
+
+
+  "Stage4_Red": new MultiGame(function(){
       this._sequence=[
         "Any.do" ,
         "Nike run+" ,
@@ -545,28 +573,20 @@ var gameCenter={
   }),
 
 
-  "Stage4_Red": new MultiGame(function(){
-      this._sequence=[
-        "Path" ,
-        "Pinterest" ,
-        "Press" 
-      ];
-  }),
-
-
   "Stage5_Green": new MultiGame(function(){
       this._sequence=[
-        "微信" ,
-        "来往" ,
-        "易信" 
+        "百度云" ,
+        "Skydrive" ,
+        "iCloud" 
+
       ];
   }),
 
   "Stage5_Red": new MultiGame(function(){
       this._sequence=[
-        "Twitter(old)" ,
-        "Tumblr" ,
-        "Tesla" 
+        "微信" ,
+        "来往" ,
+        "易信" 
       ];
   }),
 

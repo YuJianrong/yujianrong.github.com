@@ -37,6 +37,14 @@ div {
 
 }
 
+.answer .apps img {
+  width: 70px;
+  height: 70px;
+  margin: 0;
+  border: 0;
+  margin-right: 20px;
+}
+
 .timer{
   position: absolute;
   top: 260px;
@@ -69,12 +77,12 @@ div {
 }
 
 #GreenScore {
-  background-color: green;
+  background-color: #12945B;
   left: 0;
 }
 
 #RedScore{
-  background-color: red;
+  background-color: #CF2C0D;
   right: 0;
 }
 
