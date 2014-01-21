@@ -252,7 +252,7 @@ function GameMusic(audio){
 }
 
 function GameTimer(domTimer){
-  this._tick = 300;
+  this._tick = 200;
   this._paused = true;
   this._intervalId = 0;
   this.pause = function(){
@@ -307,10 +307,10 @@ function updateScore(){
 
   var scoreGrid = 40;
 
-  $("#GreenScore").style.height = localStorage.getItem("GreenScore") * scoreGrid + "px";
-  $("#RedScore").style.height = localStorage.getItem("RedScore") * scoreGrid + "px";
-  $("#GreenScore").style.lineHeight = localStorage.getItem("GreenScore") * scoreGrid + "px";
-  $("#RedScore").style.lineHeight = localStorage.getItem("RedScore") * scoreGrid + "px";
+  $("#GreenScore").style.height = ((localStorage.getItem("GreenScore")|0)+2) * scoreGrid + "px";
+  $("#RedScore").style.height = ((localStorage.getItem("RedScore")|0)+2) * scoreGrid + "px";
+  $("#GreenScore").style.lineHeight = ((localStorage.getItem("GreenScore")|0)+2) * scoreGrid + "px";
+  $("#RedScore").style.lineHeight = ((localStorage.getItem("RedScore")|0)+2) * scoreGrid + "px";
 }
 
 function gameKeyPressed(ev){
@@ -509,15 +509,14 @@ var gameCenter={
         { type:"image", file: "Flipboard"},
         { type:"image", file: "Instapaper"},
         { type:"image", file: "Foursquare"},
-        // { type:"image", file: "Instagram"},
         { type:"image", file: "Dropbox"},
         { type:"image", file: "Youtube"},
         { type:"image", file: "Quora"},
-        // { type:"image", file: "Pocket" },
-        // { type:"image", file: "Snapchat" },
-        // { type:"image", file: "Moves"},
-        // { type:"image", file: "Pandora"},
-        // { type:"image", file: "Tweetbot"},
+        { type:"image", file: "Pocket" },
+        { type:"image", file: "Snapchat" },
+        { type:"image", file: "Moves"},
+        { type:"image", file: "Pandora"},
+        { type:"image", file: "Tweetbot"}
       ];
   }, true),
 
@@ -555,6 +554,22 @@ var gameCenter={
   }),
 
 
+  "Stage5_Green": new MultiGame(function(){
+      this._sequence=[
+        "微信" ,
+        "来往" ,
+        "易信" 
+      ];
+  }),
+
+  "Stage5_Red": new MultiGame(function(){
+      this._sequence=[
+        "百度云" ,
+        "Skydrive" ,
+        "iCloud" 
+      ];
+  }),
+
   "Stage4_Green": new MultiGame(function(){
       this._sequence=[
         "Twitter(old)" ,
@@ -569,24 +584,6 @@ var gameCenter={
         "Any.do" ,
         "Nike run+" ,
         "Clear" 
-      ];
-  }),
-
-
-  "Stage5_Green": new MultiGame(function(){
-      this._sequence=[
-        "百度云" ,
-        "Skydrive" ,
-        "iCloud" 
-
-      ];
-  }),
-
-  "Stage5_Red": new MultiGame(function(){
-      this._sequence=[
-        "微信" ,
-        "来往" ,
-        "易信" 
       ];
   }),
 
