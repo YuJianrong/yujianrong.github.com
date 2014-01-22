@@ -46,7 +46,8 @@ var setting = {
     "易信" : "yixin.webp",
     "Youtube" : "Youtube.webp",
     "Dropbox" : "Dropbox.webp",
-    "Quora" : "Quora.webp"
+    "Quora" : "Quora.webp",
+    "HNY" : "HappyNewYear.jpeg"
   },
   music: {
     "Angry Birds": "AngryBirds.mp3",
@@ -281,7 +282,8 @@ var Key={
   enter: 13,
   R: 82,
   C: 67,
-  G: 71
+  G: 71,
+  F: 70
 };
 
 function scoreReset(){
@@ -343,6 +345,8 @@ function gameKeyPressed(ev){
       getResource("music", "植物大战僵尸").play();
     }
     break;
+    case Key.F:
+    $("#HappyNewYear").setAttribute("data-show", "true");
   }
 
   if (Object.keys(Key).reduce(function(obj, key){ obj[Key[key]] = true; return obj;},{})[ev.keyCode]!== undefined) {
@@ -381,7 +385,7 @@ function SingleGame(init, showScore){
       $(".container", this._dom).setAttribute("data-show", "false");
       $(".paused", this._dom).setAttribute("data-show", "false");
       $(".answer .app", this._dom).innerHTML = option.file;
-      $(".answer .app", this._dom).setAttribute("data-show", "false");
+      // $(".answer .app", this._dom).setAttribute("data-show", "false");
 
       if (option.type === "music") {
         this._instance = new GameMusic(getResource("music", option.file));
@@ -428,7 +432,7 @@ function MultiGame(init){
     $(".containerM", this._dom).setAttribute("data-show", "false");
     $(".containerM", this._dom).innerHTML = "";
     $(".timer", this._dom).setAttribute("data-show", "false");
-    $(".answer .apps", this._dom).setAttribute("data-show", "false");
+    // $(".answer .apps", this._dom).setAttribute("data-show", "false");
     $(".answer .apps", this._dom).innerHTML = "";
 
     this._sequence.forEach(function(file){
