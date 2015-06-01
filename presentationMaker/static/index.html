@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script charset="utf8" src="config.js"> </script>
+        <script charset="utf8" src="main.js"> </script>
+        <title> Presentation </title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no;"/> 
+        <meta name="apple-mobile-web-app-capable" content="yes" />  
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />  
+    </head>
+    <body style="padding:0px;margin:0px">
+        <div id="AuthoringTool" style="width:500px;padding:0px;margin:0px; border-style:solid; border-width:1px; border-color:black">
+            <input type="BUTTON" id="Tool_NewText" value="new text"> </input>
+            <input type="BUTTON" id="Tool_DeleteNode" value="delete ndoe"> </input>
+            <input type="BUTTON" id="Tool_NewPage" value="new page"> </input>
+            <input type="BUTTON" id="Tool_DeletePage" value="delete page"> </input>
+            <input type="BUTTON" id="Tool_clearAll" value="New PPT" style="background-color:#f77"> </input>
+            <input type="BUTTON" id="Tool_viewConfig" value="Config" style="background-color:#ff7"> </input>
+            <div id="properties">
+                Text: <input type="TEXT" id="Prop_text" style="width: 300px"> <br/>
+                Scale: <input type="TEXT" id="Prop_text_scale" style="width: 30px" value="100" >%
+                <input id="Prop_range_scale" type="range" min="20" max="600" step="1" value="100" style="width:300px"> <br/>
+                Color:<input type="TEXT" id="Prop_color" style="width:60px" value="blue"> <br/>
+                Angle: <input id="Prop_text_angle" type="TEXT" style="width: 40px" value="0">
+                <input id="Prop_range_angle" type="range" min="-180" max="180" step="5" value="0" style="width:300px"> <br/>
+                Align: 
+                <input type="radio" name="Prop_radio_align" id="Prop_radio_align_left" value="left" > Left </input>
+                <input type="radio" name="Prop_radio_align" id="Prop_radio_align_center" value="center" checked="checked"> Center</input>
+                <input type="radio" name="Prop_radio_align" id="Prop_radio_align_right" value="right" > Right</input>
+                <br/>
+                Position:  X: <input type="TEXT" id="Prop_text_X" width="40px"> Y:<input type="TEXT" id="Prop_text_Y" width="40px"> <br/>
+                Opacity: <input id="Prop_text_opacity" type="TEXT" style="width: 40px" value="100">
+                <input id="Prop_range_opacity" type="range" min="0" max="100" step="1" value="100" style="width:300px"> <br/>
+
+            </div>
+        </div>
+
+        <div id="PageControler" style="position:absolute; left:500px; top:0px;">
+            <br/>
+        Pages:<div id="pageButtons" style="display:inline"> </div> <br/>
+        Frames:
+        <input type="BUTTON" id="Page_NewFrame" value="+" style="background-color:#ff5"> </input>
+        <input type="BUTTON" id="Page_deleteFrame" value="-" style="background-color:#ff5"> </input>
+        <div id="pageFrameButtons" style="display:inline"> </div> <br/>
+        </div>
+        <div id="main" style="padding:0px; margin:0px;font-family:Arial">
+            </div>
+        <div id="config" style="display:none">
+            <textarea id="text_config" style="width:800px;height:500px;"></textarea>
+        </div>
+    </body>
+</html>

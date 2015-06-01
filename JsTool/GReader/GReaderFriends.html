@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function buildResult()
+            {
+                var outHTML="";
+                var JSONtext = document.getElementById("textArea_json").value;
+                var jsonData = JSON.parse(JSONtext);
+                for(var i=0; i<jsonData.friends.length; ++i)
+                {
+                    var theFriend = jsonData.friends[i];
+                    outHTML += "<input type='CHECKBOX' name='friends' value='"+ JSON.stringify(theFriend.profileIds) + "'> </input>";
+                    outHTML += theFriend.displayName+": ";
+                    for (var j=0; j<theFriend.profileIds.length;++j)
+                    {
+                        outHTML+="   <a href='https://plus.google.com/" + theFriend.profileIds[j] + "/posts'> Profile " + (j+1) + " </a>&nbsp;&nbsp;";
+                    }
+                    outHTML+= "<br/>";
+                }
+                document.getElementById("result").innerHTML = outHTML;
+            }
+
+            function CheckBoxClick()
+            {
+                var friendsChkbox = document.getElementsByName("friends");
+                for (var i=0; i<friendsChkbox.length;++i)
+                    friendsChkbox[i].checked = document.getElementById("cb_All").checked;
+            }
+            function openAll()
+            {
+                var friendsChkbox = document.getElementsByName("friends");
+                for (var i=0; i<friendsChkbox.length;++i)
+                {
+                    if (friendsChkbox[i].checked){
+                        var Ids = JSON.parse(friendsChkbox[i].value);
+                        for (var j=0; j< Ids.length; ++j)
+                            window.open("https://plus.google.com/" + Ids[j] + "/posts");
+                    }
+                }
+            }
+        </script>
+        
+    </head>
+    <body>
+
+        JSON Text: <br/>
+        <textarea style="width: 800px; height:400px;"  id="textArea_json">
+        </textarea>
+<br/>
+<input type="BUTTON" value="Parse the JSON" onclick="buildResult();" />
+<input type="CHECKBOX"  onclick="CheckBoxClick();" id="cb_All" > CheckAll/UncheclAll </input>
+<input type="BUTTON" value="Open All Checked" onclick="openAll();" />
+        <div id="result">
+        </div>
+    </body>
+
+</html>
+

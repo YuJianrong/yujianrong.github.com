@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+ Copyright 2010 Yu Jianrong, All Rights Reserved
+ 
+ Licensed under BSD License.
+-->
+<head>
+    <meta name="viewport" content="user-scalable=0,width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Bookmarklet Library</title>
+</head>
+
+<body style="font-size:16px;display:block;magin:0px;padding:0px">
+    Bookmarklet 小仓库(iOS用) <br/>
+     <br/>
+     <b>     Bookmarklet安装方法：</b><br/>
+    * 用iOS设备的Safari打开该页面<br/>
+    * 选取Bookmarklet输入框中的所有代码并点击“拷贝”<br/>
+    * 点击地址栏上的加号按钮并选择“添加书签”,你可以改一下书签名为Bookmarklet的名字，然后点击“存储”将该书签存进去<br/>
+    * 点击地址栏上书签按钮打开书签，点击“编辑”，点击刚才加进去的那个书签进行编辑<br/>
+    * 用一开始拷贝的代码将该书签的地址部分替换掉（不要粘帖在后面，要把"http://...."整个链接全部替换掉）<br/>
+    * 安装完成<br/>
+     <br/>
+     <b>     Bookmarklet使用方法：</b><br/>
+    * 在相关页面打开书签，点击相关Bookmarklet条目<br/>
+
+
+     <br/>
+     <b>     Bookmarklets：</b><br/>
+    <ul>
+        <li>
+        iPad Google Reader放大程序(注意：在设置了放大后有时需要旋转iPad再转回来以使其页面刷新)<br/>
+        <textarea style="width:300px;height:100px;">javascript:(function(){if(!window.iPadExtensionEnable){iPadExtensionEnable=true;var g=document.createElement("span");g.innerHTML=" <b>Scale to:</b><select id='ScaleRatio'></select>";var f=document.getElementById("sign-out");f.parentNode.insertBefore(g,f.nextSibling);var d=document.getElementById("ScaleRatio");for(b=0;b<=10;++b){var e=document.createElement("option");e.innerHTML=(100+b*10)+"%";e.value=1+b/10;d.add(e,null)}d.onchange=function(){localStorage.removeItem("iPadGoogleReaderScale");localStorage.setItem("iPadGoogleReaderScale",String(d.value));document.getElementsByTagName("meta")[0].content="width=320,initial-scale="+d.value+",maximum-scale="+d.value+",user-scalable=0";alert("The page had been scaled to "+(Math.round(d.value*10)*10)+"%, you may need rotate your device to make the page refresh!");setTimeout(function(){document.body.style.width="100%";setTimeout(function(){document.body.style.display="none";setTimeout(function(){document.body.style.display="inline"},0)},0)},0)};var c=localStorage.getItem("iPadGoogleReaderScale");if(c){c=parseFloat(c)}else{c=1+2/10}d.value=c;d.onchange()}var j=document.getElementsByTagName("embed");for(var b=0;b<j.length;++b){var a=j[b];var h=(/^http:\/\/player.youku.com\/player.php\/sid\/(.*)\/v.swf/).exec(a.src);if(h){a.insertAdjacentHTML("afterEnd","<a target='_blank' href='http://v.youku.com/v_show/id_"+h[1]+".html'> Open movie in new tab </a>");a.parentElement.removeChild(a)}}})();</textarea><br/>
+        <a href="GoogleReaderScale.js">source</a><br/>
+        </li>
+        <li>
+        显示JS对象的值（对象将被转化为JSON字符串，对象由eval函数调用，所以也可以运行函数）<br/>
+        <textarea style="width:300px;height:100px;">javascript:(function(){var a=prompt('');alert(JSON.stringify(eval.call(window,a)));})();</textarea><br/>
+        </li>
+        <li>
+        iPad 在线漫画网站阅读器<br/>
+        <a href="../iPadMangaReader/index.html">阅读器页面</a>
+        </li>
+        <li> 
+        View source (from <a href="http://fettig.net/weblog/2007/07/02/view-source-for-safari-on-iphone/">fettig.net</a>):察看页面源代码(注意：不是真的页面源代码，只是处理后的页面的HTML页面源代码)<br/>
+        <textarea style="width:300px;height:100px;">javascript:var%20sourceWindow%20%3D%20window.open%28%27about%3Ablank%27%29%3B%20%0Avar%20newDoc%20%3D%20sourceWindow.document%3B%20%0AnewDoc.open%28%29%3B%20%0AnewDoc.write%28%27%3Chtml%3E%3Chead%3E%3Ctitle%3ESource%20of%20%27%20%2B%20document.location.href%20%2B%20%27%3C/title%3E%3C/head%3E%3Cbody%3E%3C/body%3E%3C/html%3E%27%29%3B%20%0AnewDoc.close%28%29%3B%20%0Avar%20pre%20%3D%20newDoc.body.appendChild%28newDoc.createElement%28%22pre%22%29%29%3B%20%0Apre.appendChild%28newDoc.createTextNode%28document.documentElement.innerHTML%29%29%3B</textarea><br/>
+        </li>
+        <li>
+        Find in this page (from <a href="http://www.lifeclever.com/17-powerful-bookmarklets-for-your-iphone/">Life Clever</a>):当前页面中查找字符串并标亮(iOS 4.2.1 开始内置了) <br/>
+        <textarea style="width:300px;height:100px;">javascript:void%28s%3Dprompt%28%27Find%20text%3A%27%2C%27%27%29%29%3Bs%3D%27%28%27+s+%27%29%27%3Bx%3Dnew%20RegExp%28s%2C%27gi%27%29%3Brn%3DMath.floor%28Math.random%28%29*100%29%3Brid%3D%27z%27%20+%20rn%3Bb%20%3D%20document.body.innerHTML%3Bb%3Db.replace%28x%2C%27%3Cspan%20name%3D%27%20+%20rid%20+%20%27%20id%3D%27%20+%20rid%20+%20%27%20style%3D%5C%27color%3A%23000%3Bbackground-color%3Ayellow%3B%20font-weight%3Abold%3B%5C%27%3E%241%3C/span%3E%27%29%3Bvoid%28document.body.innerHTML%3Db%29%3Balert%28%27Found%20%27%20+%20document.getElementsByName%28rid%29.length%20+%20%27%20matches.%27%29%3Bwindow.scrollTo%280%2Cdocument.getElementsByName%28rid%29%5B0%5D.offsetTop%29%3B</textarea><br/>
+        </li>
+        <li>
+        移除http://www.86zw.com广告<br/>
+        <textarea style="width:300px;height:100px;">javascript:Icounter=0,IntervalID=setInterval(function(){document.onclick=null,allIframes=document.body.querySelectorAll("iframe");for(var a=0;a<allIframes.length;++a)allIframes[a].parentElement.removeChild(allIframes[a]);allIa=document.body.querySelectorAll("a");for(var a=0;a<allIa.length;++a)allIa[a].target="_blank";Icounter++,Icounter>200&&clearInterval(IntervalID)},100)</textarea><br/>
+        </li>
+        <li>
+        移除http://www.86zw.com广告(不开新窗）<br/>
+        <textarea style="width:300px;height:100px;">javascript:Icounter=0,IntervalID=setInterval(function(){document.onclick=null,allIframes=document.body.querySelectorAll("iframe");for(var a=0;a<allIframes.length;++a)allIframes[a].parentElement.removeChild(allIframes[a]);Icounter++,Icounter>200&&clearInterval(IntervalID)},100)</textarea><br/>
+        </li>
+
+    </ul>
+
+    作者：yujianrong[at]gmail.com<br/>
+
+</body>
+</html>
+

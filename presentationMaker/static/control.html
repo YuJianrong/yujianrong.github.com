@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Controller </title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no;"/> 
+        <meta name="apple-mobile-web-app-capable" content="yes" />  
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />  
+        <script>
+            function next()
+            {
+                var request = new XMLHttpRequest();
+                request.open("GET", "/?action=next", false);
+                request.send();
+            }
+
+            function pre()
+            {
+                var request = new XMLHttpRequest();
+                request.open("GET", "/?action=pre", false);
+                request.send();
+            }
+        </script>
+
+    </head>
+    <body style="padding:0px;margin:0px">
+        <div style="display:inline;position:fixed;left:0px;width:160px;height:480px;padding:0px;margin:0px;background-color:#ff6" ontouchstart="pre();">
+        </div>
+        <div style="display:inline;position:fixed;left:160px;width:160px;height:480px;padding:0px;margin:0px;background-color:#f6f" ontouchend="next();">
+        </div>
+    </body>
+</html>
